@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sessiontask/constants/constants.dart';
 
 class FrontEndPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Python'),
+        title: Text('Frontend', style: poppins.copyWith(fontSize: 14)),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
           'Welcome to the Frontend page!',
-          style: TextStyle(fontSize: 24),
+          style: poppins.copyWith(fontSize: 14),
         ),
       ),
     );

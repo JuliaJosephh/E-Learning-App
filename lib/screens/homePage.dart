@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/widgets/BuildChat.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
+import 'package:sessiontask/widgets/BuildProfile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,8 +14,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int selected_index = 0;
+
   @override
   Widget build(BuildContext context) {
+    var page_selected;
+    if (selected_index == 0) {
+      page_selected = BuildCoursePage(context);
+    } else if (selected_index == 1) {
+      page_selected = BuildChat(context);
+    } else {
+      page_selected = BuildProfile(context);
+    }
     return MaterialApp(
       home: Scaffold(
         appBar: PreferredSize(
@@ -92,13 +106,28 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: selected_index,
+            selectedItemColor: backgroundColor,
+            onTap: (value) {
+              setState(() {
+                selected_index = value;
+              });
+            },
+            items: [
+              BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+              BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat)),
+              BottomNavigationBarItem(
+                  label: "Profile",
+                  icon: Icon(Icons.person_pin_circle_outlined)),
+            ]),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BuildCoursePage(context),
+                page_selected,
               ],
             ),
           ),

@@ -16,10 +16,11 @@ import 'package:sessiontask/screens/MobilePages/FlutterBasicsPage.dart';
 
 // Define the chapters for each course with specific pages
 final List<Map<String, dynamic>> aiChapters = [
-  {'index': 1, 'title': 'Python', 'isLocked': false, 'Page': PythonPage()},
+  {'index': 1, 'title': 'Python Basics', 'isLocked': false, 'Page': PythonPage()},
   {'index': 2, 'title': 'Python libraries: Pandas', 'isLocked': true, 'Page': PandasPage()},
   {'index': 3, 'title': 'Python libraries: NumPy', 'isLocked': true, 'Page': NumPyPage()},
   {'index': 4, 'title': 'Machine Learning', 'isLocked': true, 'Page': MachineLearningPage()},
+  
 ];
 
 final List<Map<String, dynamic>> webDevChapters = [

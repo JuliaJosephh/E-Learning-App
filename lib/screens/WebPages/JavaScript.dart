@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:sessiontask/constants/constants.dart';
 
 class JavaScript extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Python'),
+        title: Text('JavaScript', style: poppins.copyWith(fontSize: 14)),
       ),
-      body: const Center(
+      body: Center(
         child: Text(
           'Welcome to the JavaScript page!',
-          style: TextStyle(fontSize: 24),
+           style: poppins.copyWith(fontSize: 14),
         ),
       ),
     );
