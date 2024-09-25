@@ -1,8 +1,8 @@
 // ignore_for_file: camel_case_types
 
 import 'package:flutter/material.dart';
-class signwplatform extends StatelessWidget {
-  const signwplatform({
+class SignUpPlatform extends StatelessWidget {
+  const SignUpPlatform({
     super.key,
   });
 

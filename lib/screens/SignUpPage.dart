@@ -13,6 +13,7 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   bool hidden = true, checked = false;
+  String? country;
   void checked_box(newValue) {
     setState(() {
       checked = newValue!;
@@ -210,7 +211,7 @@ class _SignupState extends State<Signup> {
                               },
                               icon: Icon(Icons.remove_red_eye)),
                           border: InputBorder.none,
-                          hintText: "***********",
+                          hintText: "*",
                           hintStyle: poppins.copyWith(
                               color: Colors.black38, fontSize: 12),
                           contentPadding: const EdgeInsets.only(top: 15)),
@@ -250,7 +251,7 @@ class _SignupState extends State<Signup> {
                                 },
                                 icon: Icon(Icons.remove_red_eye)),
                             border: InputBorder.none,
-                            hintText: "***********",
+                            hintText: "*",
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12),
                             contentPadding: const EdgeInsets.only(top: 15)),
@@ -259,6 +260,42 @@ class _SignupState extends State<Signup> {
               ),
               SizedBox(
                 height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  children: [
+                    Radio(
+                        value: "Male",
+                        groupValue: country,
+                        onChanged: (val) {
+                          setState(() {
+                            country = val;
+                          });
+                        }),
+                    Text(
+                      "Male",
+                      style: poppins.copyWith(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Radio(
+                        value: "Female",
+                        groupValue: country,
+                        onChanged: (val) {
+                          setState(() {
+                            country = val;
+                          });
+                        }),
+                    Text(
+                      "Female",
+                      style: poppins.copyWith(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
@@ -326,7 +363,7 @@ class _SignupState extends State<Signup> {
                   ],
                 ),
               ),
-              signwplatform(),
+              SignUpPlatform(),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: Row(
