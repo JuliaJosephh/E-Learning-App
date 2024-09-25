@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-  Widget BuildChat(BuildContext context) {
-    return Scaffold(
+@override
+Widget BuildChat(BuildContext context) {
+  return MaterialApp(
+    home: Scaffold(
       appBar: AppBar(
         title: const Text('Chat'),
       ),
       body: const Center(
         child: Text(
-          'Welcome to the Chat page!',
+          'Welcome to the Profile page!',
           style: TextStyle(fontSize: 24),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
