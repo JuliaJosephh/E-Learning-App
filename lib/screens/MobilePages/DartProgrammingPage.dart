@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
 class DartProgrammingPage extends StatelessWidget {
+  const DartProgrammingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -13,25 +13,68 @@ import 'package:sessiontask/screens/MobilePages/BuildingAndroidAppsPage.dart';
 import 'package:sessiontask/screens/MobilePages/DartProgrammingPage.dart';
 import 'package:sessiontask/screens/MobilePages/FlutterBasicsPage.dart';
 
-
 // Define the chapters for each course with specific pages
 final List<Map<String, dynamic>> aiChapters = [
-  {'index': 1, 'title': 'Python Basics', 'isLocked': false, 'Page': PythonPage()},
-  {'index': 2, 'title': 'Python libraries: Pandas', 'isLocked': true, 'Page': PandasPage()},
-  {'index': 3, 'title': 'Python libraries: NumPy', 'isLocked': true, 'Page': NumPyPage()},
-  {'index': 4, 'title': 'Machine Learning', 'isLocked': true, 'Page': MachineLearningPage()},
-  
+  {
+    'index': 1,
+    'title': 'Python Basics',
+    'isLocked': false,
+    'Page': PythonPage()
+  },
+  {
+    'index': 2,
+    'title': 'Python libraries: Pandas',
+    'isLocked': true,
+    'Page': PandasPage()
+  },
+  {
+    'index': 3,
+    'title': 'Python libraries: NumPy',
+    'isLocked': true,
+    'Page': NumPyPage()
+  },
+  {
+    'index': 4,
+    'title': 'Machine Learning',
+    'isLocked': true,
+    'Page': MachineLearningPage()
+  },
 ];
 
 final List<Map<String, dynamic>> webDevChapters = [
-  {'index': 1, 'title': 'HTML & CSS Basics', 'isLocked': false, 'Page': HtmlCSSPage()},
-  {'index': 2, 'title': 'JavaScript Basics', 'isLocked': true, 'Page': JavaScript()},
+  {
+    'index': 1,
+    'title': 'HTML & CSS Basics',
+    'isLocked': false,
+    'Page': HtmlCSSPage()
+  },
+  {
+    'index': 2,
+    'title': 'JavaScript Basics',
+    'isLocked': true,
+    'Page': JavaScript()
+  },
   {'index': 3, 'title': 'FrontEnd', 'isLocked': true, 'Page': FrontEndPage()},
   {'index': 4, 'title': 'BackEnd', 'isLocked': true, 'Page': BackEndPage()},
 ];
 
 final List<Map<String, dynamic>> mobileDevChapters = [
-  {'index': 1, 'title': 'Flutter Basics', 'isLocked': false, 'Page': FlutterBasicsPage()},
-  {'index': 2, 'title': 'Dart Programming', 'isLocked': true, 'Page': DartProgrammingPage()},
-  {'index': 3, 'title': 'Building Android Apps', 'isLocked': true, 'Page':BuildingAndroidAppsPage()},
+  {
+    'index': 1,
+    'title': 'Flutter Basics',
+    'isLocked': false,
+    'Page': FlutterBasicsPage()
+  },
+  {
+    'index': 2,
+    'title': 'Dart Programming',
+    'isLocked': true,
+    'Page': DartProgrammingPage()
+  },
+  {
+    'index': 3,
+    'title': 'Building Android Apps',
+    'isLocked': true,
+    'Page': BuildingAndroidAppsPage()
+  },
 ];

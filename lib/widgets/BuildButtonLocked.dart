@@ -6,7 +6,7 @@ Widget buildLockedButton(BuildContext context, int pointNum, String pointDes,
   return ElevatedButton(
     style: ButtonStyle(
       backgroundColor:
-          MaterialStateProperty.all(locked ? Colors.grey : backgroundColor),
+          WidgetStateProperty.all(locked ? Colors.grey : backgroundColor),
     ),
     onPressed: locked
         ? null // Disable the button if it's locked

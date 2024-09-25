@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
 class NumPyPage extends StatelessWidget {
+  const NumPyPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
