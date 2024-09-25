@@ -48,22 +48,22 @@ class CourseDetailsPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         Container(
-                          decoration: BoxDecoration(
-                              color: GreyBoxColor,
-                              borderRadius: BorderRadius.circular(25)),
-                          child: Column(
-                            children: [
-                              buildlockedbtn(context, 1, "data types", true),
-                              SizedBox(height: 10,),
+                            decoration: BoxDecoration(
+                                color: GreyBoxColor,
+                                borderRadius: BorderRadius.circular(25)),
+                            child: Column(
+                              children: [
+                                buildlockedbtn(context, 1, "data types", true),
+                                const SizedBox(
+                                  height: 10,
+                                ),
                                 buildlockedbtn(context, 1, "data types", false),
-
-                            ],
-                          )
-                        ),
+                              ],
+                            )),
                       ],
                     ),
                   ),
