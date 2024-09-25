@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/BuikdCourseBox.dart';
+import
 
 Widget BuildCoursePage(BuildContext context) {
-  // Define the chapters for each course
-  final List<Map<String, dynamic>> aiChapters = [
-    {'index': 1, 'title': 'Python', 'isLocked': false},
-    {'index': 2, 'title': 'Python libraries: Pandas', 'isLocked': true},
-    {'index': 3, 'title': 'Python libraries: NumPy', 'isLocked': true},
-    {'index': 4, 'title': 'Machine Learning', 'isLocked': true}
-  ];
-
-  final List<Map<String, dynamic>> webDevChapters = [
-    {'index': 1, 'title': 'HTML & CSS Basics', 'isLocked': false},
-    {'index': 2, 'title': 'JavaScript Basics', 'isLocked': true},
-    {'index': 3, 'title': 'FrontEnd', 'isLocked': true},
-    {'index': 4, 'title': 'BackEnd', 'isLocked': true}
-  ];
-
-  final List<Map<String, dynamic>> mobileDevChapters = [
-    {'index': 1, 'title': 'Flutter Basics', 'isLocked': false},
-    {'index': 2, 'title': 'Dart Programming', 'isLocked': true},
-    {'index': 3, 'title': 'Building Android Apps', 'isLocked': true},
-  ];
-
   return SingleChildScrollView(
     child: Container(
       padding: const EdgeInsets.all(10.0),
@@ -45,7 +25,7 @@ Widget BuildCoursePage(BuildContext context) {
           const SizedBox(height: 10),
           Container(
             decoration: BoxDecoration(
-              color: GreyBoxColor,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
