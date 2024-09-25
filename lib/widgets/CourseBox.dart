@@ -54,7 +54,7 @@ Widget buildCourseBox(
             style: poppins.copyWith(
               fontSize: 12,
               fontWeight: FontWeight.normal,
-            ),
+            )
           ),
         ),
       ],

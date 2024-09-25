@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:sessiontask/constants/constants.dart';
+
+Widget buildlockedbtn(BuildContext context, int point_num, String point_des,bool locked) {
+  return ElevatedButton(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(backgroundColor),
+    ),
+    onPressed: () {
+
+    },
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20.0),
+          child: Text(
+            "point $point_num : ",
+            style: poppins.copyWith(
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        Center(
+          child: Text("$point_des",
+              style: poppins.copyWith(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              )),
+        ),
+        Expanded(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.lock,
+                color:locked ? Colors.white : Colors.white.withOpacity(0),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}
