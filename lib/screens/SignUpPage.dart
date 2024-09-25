@@ -211,7 +211,7 @@ class _SignupState extends State<Signup> {
                               },
                               icon: Icon(Icons.remove_red_eye)),
                           border: InputBorder.none,
-                          hintText: "*",
+                          hintText: "*********",
                           hintStyle: poppins.copyWith(
                               color: Colors.black38, fontSize: 12),
                           contentPadding: const EdgeInsets.only(top: 15)),
@@ -251,7 +251,7 @@ class _SignupState extends State<Signup> {
                                 },
                                 icon: Icon(Icons.remove_red_eye)),
                             border: InputBorder.none,
-                            hintText: "*",
+                            hintText: "*********",
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12),
                             contentPadding: const EdgeInsets.only(top: 15)),

@@ -9,6 +9,7 @@ const Color backgroundColor = Color.fromARGB(255, 11, 93, 235);
 const Color TextColor = Color.fromARGB(255, 7, 26, 59);
 Color? WavingHandColor = Colors.yellow[500];
 Color? GreySearchColor = Colors.grey[600];
-Color? GreyBoxColor = Colors.grey[300];
+Color? GreyBoxColor = Colors.grey[200];
+Color? LockedChapterColor = Colors.grey[400];
 const double heading_title = 35.0, des_title = 16.0;
 final TextStyle poppins = GoogleFonts.poppins();

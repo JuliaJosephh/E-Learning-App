@@ -35,7 +35,7 @@ class CourseDetailsPage extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    color: GreyBoxColor,
+                    color: Colors.white,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -43,9 +43,9 @@ class CourseDetailsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          "Chapter List",
+                          "Course Chapters List",
                           style: poppins.copyWith(
-                            fontSize: 30,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
                           ),
@@ -53,19 +53,19 @@ class CourseDetailsPage extends StatelessWidget {
                         const SizedBox(height: 25),
                         Container(
                           decoration: BoxDecoration(
-                            color: GreyBoxColor,
+                            color: Colors.white,
                             borderRadius: BorderRadius.circular(25),
                           ),
                           child: Column(
                             children: chapters.map((chapter) {
                               return Column(
                                 children: [
-                                  buildlockedButton(
-                                    context,
-                                    chapter['index'],
-                                    chapter['title'],
-                                    chapter['isLocked'],
-                                  ),
+                                  buildLockedButton(
+                                      context,
+                                      chapter['index'],
+                                      chapter['title'],
+                                      chapter['isLocked'],
+                                      chapter['Page']),
                                   const SizedBox(height: 10),
                                 ],
                               );

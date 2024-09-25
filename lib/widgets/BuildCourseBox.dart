@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/screens/CoursesPage.dart';
+import 'package:sessiontask/screens/CourseDetailsPage.dart';
 
 Widget buildCourseBox(BuildContext context, String courseTitle, String imageUrl,
     List<Map<String, dynamic>> chapters) {

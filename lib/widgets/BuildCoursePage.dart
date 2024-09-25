@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/BuikdCourseBox.dart';
-import
+import 'package:sessiontask/widgets/BuildCourseBox.dart';
+import '../Tracks/TracksChapters.dart';
 
 Widget BuildCoursePage(BuildContext context) {
   return SingleChildScrollView(
