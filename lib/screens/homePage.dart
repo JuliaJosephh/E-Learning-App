@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/courseSector.dart';
+import 'package:sessiontask/widgets/BuildCoursePage.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildCourseSection(context),
+                BuildCoursePage(context),
               ],
             ),
           ),

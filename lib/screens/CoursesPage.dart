@@ -34,8 +34,8 @@ class CourseDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    color: GreyBoxColor,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -66,8 +66,7 @@ class CourseDetailsPage extends StatelessWidget {
                                     chapter['title'],
                                     chapter['isLocked'],
                                   ),
-                                  const SizedBox(
-                                      height: 10),
+                                  const SizedBox(height: 10),
                                 ],
                               );
                             }).toList(),

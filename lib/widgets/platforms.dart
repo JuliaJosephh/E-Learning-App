@@ -36,7 +36,7 @@ class SignUpPlatform extends StatelessWidget {
               child: IconButton(
                   onPressed: () {},
                   icon: Image.asset(
-                    "images/google.png",
+                    "images/google-logo.png",
                     height: 30,
                     width: 30,
                   ))),

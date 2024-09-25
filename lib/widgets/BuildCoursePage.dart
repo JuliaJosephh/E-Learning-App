@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/CourseBox.dart';
+import 'package:sessiontask/widgets/BuikdCourseBox.dart';
 
-Widget buildCourseSection(BuildContext context) {
+Widget BuildCoursePage(BuildContext context) {
   // Define the chapters for each course
   final List<Map<String, dynamic>> aiChapters = [
     {'index': 1, 'title': 'Python', 'isLocked': false},

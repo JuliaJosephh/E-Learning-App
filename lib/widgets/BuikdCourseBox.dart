@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/CoursesPage.dart';
 
-Widget buildCourseBox(
-    BuildContext context, String courseTitle, String imageUrl, List<Map<String, dynamic>> chapters) {
+Widget buildCourseBox(BuildContext context, String courseTitle, String imageUrl,
+    List<Map<String, dynamic>> chapters) {
   return Container(
     padding: const EdgeInsets.all(15),
     decoration: BoxDecoration(
@@ -11,7 +11,7 @@ Widget buildCourseBox(
       borderRadius: BorderRadius.circular(10),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.grey.withOpacity(0.7),
           blurRadius: 5,
           offset: const Offset(0, 3),
         ),
@@ -37,7 +37,6 @@ Widget buildCourseBox(
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-            // Navigate to CourseDetailsPage with the course title and chapters
             Navigator.push(
               context,
               MaterialPageRoute(
