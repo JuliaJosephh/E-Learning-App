@@ -3,11 +3,11 @@ import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/CoursesPage.dart';
 
 Widget buildCourseBox(
-    BuildContext context, String courseTitle, String imageUrl) {
+    BuildContext context, String courseTitle, String imageUrl, List<Map<String, dynamic>> chapters) {
   return Container(
     padding: const EdgeInsets.all(15),
     decoration: BoxDecoration(
-      color: Colors.white, // Change to white for better contrast
+      color: Colors.white,
       borderRadius: BorderRadius.circular(10),
       boxShadow: [
         BoxShadow(
@@ -37,11 +37,14 @@ Widget buildCourseBox(
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
+            // Navigate to CourseDetailsPage with the course title and chapters
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    CourseDetailsPage(courseTitle: courseTitle),
+                builder: (context) => CourseDetailsPage(
+                  courseTitle: courseTitle,
+                  chapters: chapters,
+                ),
               ),
             );
           },
@@ -54,7 +57,7 @@ Widget buildCourseBox(
             style: poppins.copyWith(
               fontSize: 12,
               fontWeight: FontWeight.normal,
-            )
+            ),
           ),
         ),
       ],

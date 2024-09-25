@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
-Widget buildlockedbtn(
+Widget buildlockedButton(
     BuildContext context, int pointNum, String pointDes, bool locked) {
   return ElevatedButton(
     style: ButtonStyle(
