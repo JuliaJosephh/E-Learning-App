@@ -1,50 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/screens/DefaultScreen.dart';
+import 'package:sessiontask/screens/loginPage.dart';
 import 'package:sessiontask/widgets/ProfileButtons.dart';
 
-@override
 Widget buildprofile(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      const SizedBox(
-        height: 10,
-      ),
+      const SizedBox(height: 10),
       buildprofilebutton(
-          context,
-          "Account Info",
-          Icon(
-            Icons.arrow_forward_ios_outlined,
-            color: IconColor,
-          ),
-          Icon(Icons.assignment_ind_rounded, color: IconColor)),
-      const SizedBox(
-        height: 20,
+        context,
+        "Account Info",
+        Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
+        Icon(Icons.assignment_ind_rounded, color: IconColor),
+        onPressed: () {
+          // Add navigation for Account Info
+          // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountInfoPage()));
+        },
       ),
+      const SizedBox(height: 20),
       buildprofilebutton(
-          context,
-          "Courses Details",
-          Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
-          Icon(Icons.density_small_sharp, color: IconColor)),
-      const SizedBox(
-        height: 20,
+        context,
+        "Courses Details",
+        Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
+        Icon(Icons.density_small_sharp, color: IconColor),
+        onPressed: () {
+          // Navigate to Courses Details page
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const DefaultScreen()),
+          );
+        },
       ),
+      const SizedBox(height: 20),
       buildprofilebutton(
-          context,
-          "Setting",
-          Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
-          Icon(Icons.settings, color: IconColor)),
-      const SizedBox(
-        height: 20,
+        context,
+        "Logout",
+        Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
+        Icon(Icons.logout_outlined, color: IconColor),
+        onPressed: () {
+          // Navigate to Login page (logout)
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => Login()),
+          );
+        },
       ),
-      buildprofilebutton(
-          context,
-          "Logout",
-          const Icon(
-            Icons.arrow_forward_ios_outlined,
-            color: Colors.transparent,
-          ),
-          Icon(Icons.logout_outlined, color: IconColor)),
     ],
   );
 }

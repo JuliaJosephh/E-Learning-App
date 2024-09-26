@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/AppBars/AppBarProfile.dart';
+import 'package:sessiontask/screens/DefaultScreen.dart';
+import 'package:sessiontask/widgets/AppBars/ProfileAppBar.dart';
+import 'package:sessiontask/widgets/BuildProfile.dart';
 import 'package:sessiontask/widgets/ProfileButtons.dart';
+import 'package:sessiontask/screens/CourseDetailsPage.dart';
 
 
-class Profilepage extends StatefulWidget {
-  const Profilepage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<Profilepage> createState() => _ProfilepageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfilepageState extends State<Profilepage> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,36 +23,9 @@ class _ProfilepageState extends State<Profilepage> {
         padding: const EdgeInsets.all(10.0),
         children: [
           const SizedBox(height: 10),
-          buildprofilebutton(
-            context,
-            "Account Info",
-            Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
-            Icon(Icons.assignment_ind_rounded, color: IconColor),
-          ),
-          const SizedBox(height: 20),
-          buildprofilebutton(
-            context,
-            "Courses Details",
-            Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
-            Icon(Icons.density_small_sharp, color: IconColor),
-          ),
-          const SizedBox(height: 20),
-          buildprofilebutton(
-            context,
-            "Settings",
-            Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
-            Icon(Icons.settings, color: IconColor),
-          ),
-          const SizedBox(height: 20),
-          buildprofilebutton(
-            context,
-            "Logout",
-            const Icon(Icons.arrow_forward_ios_outlined,
-                color: Colors.transparent),
-            Icon(Icons.logout_outlined, color: IconColor),
-          ),
-        ],
-      ),
+          buildprofile(context),
+        ]
+      )
     );
   }
 }

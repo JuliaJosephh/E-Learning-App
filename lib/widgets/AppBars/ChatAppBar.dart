@@ -3,7 +3,7 @@ import 'package:sessiontask/constants/constants.dart';
 
 PreferredSizeWidget buildChatAppBar(BuildContext context) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(70), // Specify the height of the AppBar
+    preferredSize: const Size.fromHeight(70),
     child: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,

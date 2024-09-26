@@ -3,7 +3,7 @@ import 'package:sessiontask/constants/constants.dart';
 
 PreferredSizeWidget buildprofileappbar(BuildContext context) {
   return PreferredSize(
-    preferredSize: const Size.fromHeight(230.0), // Set the desired height
+    preferredSize: const Size.fromHeight(230.0),
     child: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,

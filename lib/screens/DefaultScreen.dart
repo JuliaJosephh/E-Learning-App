@@ -6,20 +6,20 @@ import 'package:sessiontask/screens/ProfilePage.dart';
 import 'package:sessiontask/screens/homePage.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DefaultScreen extends StatefulWidget {
+  const DefaultScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<DefaultScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<DefaultScreen> {
   int selected_index = 0;
 
   final List<Widget> pages = [
     HomePage(), 
     ChatPage(),
-    Profilepage(), 
+    ProfilePage(), 
   ];
 
   @override
