@@ -1,6 +1,7 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
 class signUpPlatform extends StatelessWidget {
   const signUpPlatform({
     super.key,
@@ -12,51 +13,67 @@ class signUpPlatform extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 40.0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
           child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(width: 1, color: Colors.black38)),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    "images/apple-logo.png",
-                    height: 30,
-                    width: 30,
-                  ))),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(width: 1, color: Colors.black38)),
+            child: IconButton(
+              onPressed: () {
+                launchURL("https://appleid.apple.com/");
+              },
+              icon: Image.asset(
+                "images/apple-logo.png",
+                height: 30,
+                width: 30,
+              ),
+            ),
+          ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 40.0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
           child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(width: 1, color: Colors.black38)),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    "images/google.png",
-                    height: 30,
-                    width: 30,
-                  ))),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(width: 1, color: Colors.black38)),
+            child: IconButton(
+              onPressed: () {
+                launchURL("https://accounts.google.com/login");
+              },
+              icon: Image.asset(
+                "images/google.png",
+                height: 30,
+                width: 30,
+              ),
+            ),
+          ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(
-              vertical: 40.0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
           child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(width: 1, color: Colors.black38)),
-              child: IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    "images/facebook-logo.png",
-                    height: 30,
-                    width: 30,
-                  ))),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+                border: Border.all(width: 1, color: Colors.black38)),
+            child: IconButton(
+              onPressed: () {
+                launchURL("https://www.facebook.com/");
+              },
+              icon: Image.asset(
+                "images/facebook-logo.png",
+                height: 30,
+                width: 30,
+              ),
+            ),
+          ),
         ),
       ],
     );
+  }
+}
+Future<void> launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url); 
+  } else {
+    throw 'Could not launch $url'; 
   }
 }

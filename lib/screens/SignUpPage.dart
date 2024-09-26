@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/LoginPage.dart';
-import 'package:sessiontask/screens/homePage.dart';
 import 'package:sessiontask/widgets/platforms.dart';
 
 class Signup extends StatefulWidget {
@@ -378,8 +377,13 @@ class _SignupState extends State<Signup> {
                       overlayColor:
                           MaterialStatePropertyAll(Colors.transparent),
                       onTap: () {
-                        runApp(MaterialApp(
-                            debugShowCheckedModeBanner: false, home: Signup()));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                Login(), // Navigate to SignUpPage
+                          ),
+                        );
                       },
                       child: Text(
                         "Sign in",

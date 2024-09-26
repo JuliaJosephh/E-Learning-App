@@ -6,11 +6,19 @@ class CourseDetailsPage extends StatelessWidget {
   final String courseTitle;
   final List<Map<String, dynamic>> chapters;
 
-  const CourseDetailsPage(
-      {super.key, required this.courseTitle, required this.chapters});
+  const CourseDetailsPage({
+    super.key,
+    required this.courseTitle,
+    required this.chapters,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Get the height of the screen minus the app bar height
+    final double availableHeight = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -26,58 +34,70 @@ class CourseDetailsPage extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          "Course Chapters List",
-                          style: poppins.copyWith(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 25),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Column(
-                            children: chapters.map((chapter) {
-                              return Column(
-                                children: [
-                                  buildLockedButton(
-                                      context,
-                                      chapter['index'],
-                                      chapter['title'],
-                                      chapter['isLocked'],
-                                      chapter['Page']),
-                                  const SizedBox(height: 10),
-                                ],
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Course Chapters List",
+                    style: poppins.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
                     ),
                   ),
-                ),
+                  const SizedBox(height: 25),
+                  Expanded(
+                    child: Container(
+                      height: availableHeight,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: chapters.length > 6
+                          ? ListView.builder(
+                              itemCount: chapters.length,
+                              itemBuilder: (context, index) {
+                                final chapter = chapters[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: buildLockedButton(
+                                    context,
+                                    chapter['index'],
+                                    chapter['title'],
+                                    chapter['isLocked'],
+                                    chapter['Page'],
+                                  ),
+                                );
+                              },
+                            )
+                          : Column(
+                              children: chapters.map((chapter) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 10.0),
+                                  child: buildLockedButton(
+                                    context,
+                                    chapter['index'],
+                                    chapter['title'],
+                                    chapter['isLocked'],
+                                    chapter['Page'],
+                                  ),
+                                );
+                              }).toList(),
+                            ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

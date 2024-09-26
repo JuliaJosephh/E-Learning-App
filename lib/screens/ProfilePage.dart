@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/widgets/AppBars/ProfileAppBar.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
-import 'package:sessiontask/widgets/ProfileButtons.dart';
-import 'package:sessiontask/screens/CourseDetailsPage.dart';
 
 
 class ProfilePage extends StatefulWidget {

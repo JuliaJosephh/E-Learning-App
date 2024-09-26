@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/screens/CourseDetailsPage.dart';
 import 'package:sessiontask/screens/ChatPage.dart';
 import 'package:sessiontask/screens/ProfilePage.dart';
 import 'package:sessiontask/screens/homePage.dart';
-import 'package:sessiontask/widgets/BuildCoursePage.dart';
 
 class DefaultScreen extends StatefulWidget {
   const DefaultScreen({super.key});
@@ -17,9 +15,9 @@ class _HomeScreenState extends State<DefaultScreen> {
   int selected_index = 0;
 
   final List<Widget> pages = [
-    HomePage(), 
-    ChatPage(),
-    ProfilePage(), 
+    const HomePage(), 
+    const ChatPage(),
+    const ProfilePage(), 
   ];
 
   @override

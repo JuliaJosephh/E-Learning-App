@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/SignUpPage.dart';
-import 'package:sessiontask/screens/homePage.dart';
 
 import '../constants/constants.dart';
 import '../widgets/platforms.dart';
@@ -183,8 +182,13 @@ class _LoginState extends State<Login> {
                   InkWell(
                     overlayColor: MaterialStatePropertyAll(Colors.transparent),
                     onTap: () {
-                      runApp(MaterialApp(
-                          debugShowCheckedModeBanner: false, home: Signup()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Signup(), // Navigate to SignUpPage
+                        ),
+                      );
                     },
                     child: Text(
                       "Sign up",
