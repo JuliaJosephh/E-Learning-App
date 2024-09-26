@@ -2,5 +2,5 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
 Widget BuildChat(BuildContext context) {
-  return Text('hello');
+  return const Text('hello');
 }

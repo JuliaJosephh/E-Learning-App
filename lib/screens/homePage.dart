@@ -5,8 +5,8 @@ import 'package:sessiontask/widgets/BuildChat.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
 import 'package:sessiontask/widgets/ChatAppBar.dart';
+import 'package:sessiontask/widgets/HomeAppBar.dart';
 import 'package:sessiontask/widgets/appbarprofile.dart';
-import '../widgets/homeappbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,20 +20,20 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var page_selected;
-    var appbar_selected;
+    Widget pageSelected;
+    Widget appbarSelected;
     double appbarsize=150;
     if (selected_index == 0) {
-      page_selected = BuildCoursePage(context);
-      appbar_selected = buildhomeappbar(context);
+      pageSelected = BuildCoursePage(context);
+      appbarSelected = buildhomeappbar(context);
       appbarsize = 150;
     } else if (selected_index == 1) {
-      page_selected = BuildChat(context);
-      appbar_selected = buildChatAppBar(context);
+      pageSelected = BuildChat(context);
+      appbarSelected = buildChatAppBar(context);
       appbarsize = 70;
     } else {
-      page_selected = buildprofile(context);
-      appbar_selected = buildprofileappbar(context);
+      pageSelected = buildprofile(context);
+      appbarSelected = buildprofileappbar(context);
       appbarsize = 300;
     }
     return MaterialApp(
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           appBar: PreferredSize(
             preferredSize:  Size.fromHeight(appbarsize),
-            child: appbar_selected,
+            child: appbarSelected,
           ),
           bottomNavigationBar: BottomNavigationBar(
               currentIndex: selected_index,
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  page_selected,
+                  pageSelected,
                 ],
               ),
             ),

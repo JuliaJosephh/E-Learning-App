@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
                 ],
               ),
             ),
-            signwplatform(),
+            signUpPlatform(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

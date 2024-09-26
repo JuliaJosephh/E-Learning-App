@@ -40,7 +40,7 @@ Widget buildprofile(BuildContext context) {
       buildprofilebutton(
           context,
           "Logout",
-          Icon(
+          const Icon(
             Icons.arrow_forward_ios_outlined,
             color: Colors.transparent,
           ),

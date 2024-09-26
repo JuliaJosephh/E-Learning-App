@@ -55,7 +55,7 @@ Widget buildChatAppBar(BuildContext context) {
                 children: [
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.videocam,
                       color: Colors.white,
                       size: 30,
@@ -63,7 +63,7 @@ Widget buildChatAppBar(BuildContext context) {
                   ),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.call,
                       color: Colors.white,
                       size: 25,

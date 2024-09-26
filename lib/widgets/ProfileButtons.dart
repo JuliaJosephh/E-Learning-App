@@ -10,7 +10,7 @@ import 'package:sessiontask/constants/constants.dart';
       child: TextButton(
           style: ButtonStyle(
               overlayColor: WidgetStateColor.transparent,
-              backgroundColor: MaterialStateProperty.all(Colors.blueGrey[50])),
+              backgroundColor: WidgetStateProperty.all(Colors.blueGrey[50])),
           onPressed: () {},
           child: Padding(
             padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
@@ -21,7 +21,7 @@ import 'package:sessiontask/constants/constants.dart';
                   children: [
                     firsticon,
                     SizedBox(width: 8,),
-                    Text("$buttontxt",
+                    Text(buttontxt,
                         style: poppins.copyWith(
                             color: Colors.grey[800],
                             fontSize: 18,

@@ -29,7 +29,7 @@ PreferredSizeWidget buildprofileappbar(BuildContext context) {
         children: [
           IconButton(
               onPressed: () {},
-              icon: Icon(
+              icon: const Icon(
                 Icons.menu,
                 color: Colors.white,
               )),

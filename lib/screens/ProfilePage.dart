@@ -43,7 +43,7 @@ class _ProfilepageState extends State<Profilepage> {
           buildprofilebutton(
             context,
             "Logout",
-            Icon(Icons.arrow_forward_ios_outlined, color: Colors.transparent),
+            const Icon(Icons.arrow_forward_ios_outlined, color: Colors.transparent),
             Icon(Icons.logout_outlined, color: IconColor),
           ),
         ],
