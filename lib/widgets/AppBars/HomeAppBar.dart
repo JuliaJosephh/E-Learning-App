@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
-@override
-  Widget buildhomeappbar(BuildContext context) {
-    return AppBar(
+PreferredSizeWidget buildhomeappbar(BuildContext context) {
+  return PreferredSize(
+    preferredSize: const Size.fromHeight(140.0), // Set the desired height
+    child: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
       flexibleSpace: Container(
@@ -31,16 +32,13 @@ import 'package:sessiontask/constants/constants.dart';
               children: [
                 const CircleAvatar(
                   radius: 15,
-                  backgroundImage: AssetImage(
-                    'images/user.png',
-                  ),
+                  backgroundImage: AssetImage('images/user.png'),
                   backgroundColor: Colors.white,
                 ),
                 const SizedBox(width: 10),
                 Text(
                   'Hi, Name!',
-                  style:
-                      poppins.copyWith(fontSize: 18, color: Colors.white),
+                  style: poppins.copyWith(fontSize: 18, color: Colors.white),
                 ),
                 const SizedBox(width: 5),
                 Transform.scale(
@@ -77,5 +75,6 @@ import 'package:sessiontask/constants/constants.dart';
           ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}

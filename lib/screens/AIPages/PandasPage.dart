@@ -8,7 +8,15 @@ class PandasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pandas', style: poppins.copyWith(fontSize: 14)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Pandas',
+            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
+        backgroundColor: backgroundColor,
       ),
       body: Center(
         child: Text('Welcome to the Pandas page!',

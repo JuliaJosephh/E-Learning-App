@@ -8,13 +8,19 @@ class JavaScript extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('JavaScript', style: poppins.copyWith(fontSize: 14)),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('JavaScript',
+            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
+        backgroundColor: backgroundColor,
       ),
       body: Center(
-        child: Text(
-          'Welcome to the JavaScript page!',
-           style: poppins.copyWith(fontSize: 14),
-        ),
+        child: Text('Welcome to the JavaScript page!',
+            style: poppins.copyWith(fontSize: 14)),
       ),
     );
   }

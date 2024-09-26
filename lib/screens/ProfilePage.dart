@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/widgets/AppBars/AppBarProfile.dart';
 import 'package:sessiontask/widgets/ProfileButtons.dart';
-import 'package:sessiontask/widgets/appbarprofile.dart';
+
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -43,7 +44,8 @@ class _ProfilepageState extends State<Profilepage> {
           buildprofilebutton(
             context,
             "Logout",
-            const Icon(Icons.arrow_forward_ios_outlined, color: Colors.transparent),
+            const Icon(Icons.arrow_forward_ios_outlined,
+                color: Colors.transparent),
             Icon(Icons.logout_outlined, color: IconColor),
           ),
         ],

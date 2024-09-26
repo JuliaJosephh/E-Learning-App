@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
-class DartProgrammingPage extends StatelessWidget {
-  const DartProgrammingPage({super.key});
+class FlutterpackagesPluginsPage extends StatelessWidget {
+  const FlutterpackagesPluginsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,12 @@ class DartProgrammingPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Dart Programming',
+        title: Text('Flutter Packages & Plugins',
             style: poppins.copyWith(fontSize: 14, color: Colors.white)),
         backgroundColor: backgroundColor,
       ),
       body: Center(
-        child: Text('Welcome to the dart Programming page!',
+        child: Text('Welcome to the Flutter Packages & Plugins page!',
             style: poppins.copyWith(fontSize: 14)),
       ),
     );
