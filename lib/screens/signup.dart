@@ -297,7 +297,7 @@ class _SignupState extends State<Signup> {
                     ],
                   ),
                 ),
-                signwplatform(),
+                SignUpPlatform(),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Row(

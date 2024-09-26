@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, constant_identifier_names, unnecessary_const
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:google_fonts/google_fonts.dart';
 
 const Color btn_color = Color.fromARGB(255, 29, 26, 114);
@@ -15,10 +14,3 @@ Color? IconColor = Colors.grey[800];
 Color? LockedChapterColor = Colors.grey[400];
 const double heading_title = 35.0, des_title = 16.0;
 final TextStyle poppins = GoogleFonts.poppins();
-=======
-
-const Color btn_color = const Color.fromARGB(255, 29, 26, 114);
-const Color textfieldclr = Color.fromARGB(70, 92,92, 92);
-const heading_title = 35.0, des_title = 16.0;
-
->>>>>>> 6932e3fad81c05487746914056898d3ba007c457
