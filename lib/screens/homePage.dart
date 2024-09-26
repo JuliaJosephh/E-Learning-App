@@ -1,13 +1,11 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, non_constant_identifier_names, prefer_typing_uninitialized_variables, unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/screens/CourseDetailsPage.dart';
 import 'package:sessiontask/widgets/BuildChat.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
-import 'package:sessiontask/widgets/appbarprofile.dart';
 import 'package:sessiontask/widgets/ChatAppBar.dart';
-
+import 'package:sessiontask/widgets/appbarprofile.dart';
 import '../widgets/homeappbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,14 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var page_selected;
     var appbar_selected;
-    double appbarsize = 150;
+    double appbarsize=150;
     if (selected_index == 0) {
       page_selected = BuildCoursePage(context);
       appbar_selected = buildhomeappbar(context);
       appbarsize = 150;
     } else if (selected_index == 1) {
       page_selected = BuildChat(context);
-      appbar_selected = buildchatappbar(context);
+      appbar_selected = buildChatAppBar(context);
       appbarsize = 70;
     } else {
       page_selected = buildprofile(context);
@@ -42,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       home: SafeArea(
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(appbarsize),
+            preferredSize:  Size.fromHeight(appbarsize),
             child: appbar_selected,
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -53,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   selected_index = value;
                 });
               },
-              items: [
+              items: const [
                 BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
                 BottomNavigationBarItem(label: "Chat", icon: Icon(Icons.chat)),
                 BottomNavigationBarItem(

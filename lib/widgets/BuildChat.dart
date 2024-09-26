@@ -1,18 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sessiontask/constants/constants.dart';
 
-@override
 Widget BuildChat(BuildContext context) {
-  return MaterialApp(
-    home: Scaffold(
-      appBar: AppBar(
-        title: const Text('Chat'),
-      ),
-      body: const Center(
-        child: Text(
-          'Welcome to the Profile page!',
-          style: TextStyle(fontSize: 24),
-        ),
-      ),
-    ),
-  );
+  return Text('hello');
 }

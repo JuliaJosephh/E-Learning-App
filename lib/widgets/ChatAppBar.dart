@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
 @override
-Widget buildchatappbar(BuildContext context) {
+Widget buildChatAppBar(BuildContext context) {
   return AppBar(
     backgroundColor: Colors.transparent,
     elevation: 0,
@@ -28,59 +26,58 @@ Widget buildchatappbar(BuildContext context) {
             ],
           ),
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                CircleAvatar(
-                  radius: 25,
-                  backgroundImage: AssetImage(
-                    'images/user.png',
-                  ),
-                  backgroundColor: Colors.white,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  radius: 10,
-                  child: CircleAvatar(backgroundColor: Colors.green, radius: 7),
-                ),
-              ],
-            ),
-            SizedBox(width:180 ,),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-              
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Row(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.videocam,
-                          color: Colors.white,
-                          size: 35,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 13),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.call,
-                          color: Colors.white,
-                          size: 30,
-                        )),
+                  Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      CircleAvatar(
+                        radius: 25,
+                        backgroundImage: AssetImage('images/user.png'),
+                        backgroundColor: Colors.white,
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 10,
+                        child: CircleAvatar(
+                          backgroundColor: Colors.green,
+                          radius: 7,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ]),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.videocam,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.call,
+                      color: Colors.white,
+                      size: 25,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     ),
   );
 }
+
+
+

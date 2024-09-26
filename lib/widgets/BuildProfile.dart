@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, deprecated_member_use, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/ProfileButtons.dart';
@@ -9,18 +7,18 @@ Widget buildprofile(BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      SizedBox(
+      const SizedBox(
         height: 10,
       ),
       buildprofilebutton(
           context,
-          "Profile Info",
+          "Account Info",
           Icon(
             Icons.arrow_forward_ios_outlined,
             color: IconColor,
           ),
           Icon(Icons.assignment_ind_rounded, color: IconColor)),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       buildprofilebutton(
@@ -28,7 +26,7 @@ Widget buildprofile(BuildContext context) {
           "Courses Details",
           Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
           Icon(Icons.density_small_sharp, color: IconColor)),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       buildprofilebutton(
@@ -36,7 +34,7 @@ Widget buildprofile(BuildContext context) {
           "Setting",
           Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
           Icon(Icons.settings, color: IconColor)),
-      SizedBox(
+      const SizedBox(
         height: 20,
       ),
       buildprofilebutton(
