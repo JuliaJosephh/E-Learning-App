@@ -1,9 +1,11 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, use_key_in_widget_constructors, deprecated_member_use, prefer_const_literals_to_create_immutables, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/LoginPage.dart';
+import 'package:sessiontask/widgets/BuildGenderSelection.dart';
+import 'package:sessiontask/widgets/BuildPasswordField.dart';
+import 'package:sessiontask/widgets/BuildTermsAndConditions.dart';
+import 'package:sessiontask/widgets/BuildTextField.dart';
 import 'package:sessiontask/widgets/platforms.dart';
 
 class Signup extends StatefulWidget {
@@ -12,12 +14,28 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
-  bool hidden = true, checked = false;
-  String? country;
-  void checked_box(newValue) {
-    setState(() {
-      checked = newValue!;
-    });
+  bool checked = false;
+  String? gender;
+  final _formKey = GlobalKey<FormState>();
+
+  // Text editing controllers
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  void _signUp() {
+    if (_formKey.currentState!.validate()) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DefaultScreen(),
+        ),
+      );
+    }
   }
 
   @override
@@ -25,316 +43,109 @@ class _SignupState extends State<Signup> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Login(),
-                ),
-              );
-            },
-            icon: Icon(
-              Icons.arrow_back,
-            )),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Login(),
+              ),
+            );
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
       ),
       body: Center(
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                "Create Account",
-                textAlign: TextAlign.center,
-                style:
-                    poppins.copyWith(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Enter your details and let's get you in",
-                textAlign: TextAlign.center,
-                style: poppins.copyWith(fontSize: 12),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "First Name:",
-                  textAlign: TextAlign.start,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  "Create Account",
+                  textAlign: TextAlign.center,
                   style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                      fontSize: 26, fontWeight: FontWeight.bold),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: textfieldclr),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 5),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "First Name",
-                            hintStyle: poppins.copyWith(
-                                color: Colors.black38, fontSize: 12)),
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "Last Name:",
-                  textAlign: TextAlign.start,
-                  style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                Text(
+                  "Enter your details and let's get you in",
+                  textAlign: TextAlign.center,
+                  style: poppins.copyWith(fontSize: 12),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: textfieldclr),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 5),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Last Name",
-                            hintStyle: poppins.copyWith(
-                                color: Colors.black38, fontSize: 12)),
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "User Name:",
-                  textAlign: TextAlign.start,
-                  style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                const SizedBox(height: 40),
+                // First Name
+                CustomTextField(
+                  label: "First Name:",
+                  controller: _firstNameController,
+                  hint: "First Name",
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: textfieldclr),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 5),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "User Name",
-                          hintStyle: poppins.copyWith(
-                              color: Colors.black38, fontSize: 12)),
-                    ),
-                  ),
+                const SizedBox(height: 20),
+                // Last Name
+                CustomTextField(
+                  label: "Last Name:",
+                  controller: _lastNameController,
+                  hint: "Last Name",
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "Email:",
-                  textAlign: TextAlign.start,
-                  style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                const SizedBox(height: 20),
+                // Username
+                CustomTextField(
+                  label: "User Name:",
+                  controller: _usernameController,
+                  hint: "User Name",
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: textfieldclr),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 5),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "example@gmail.com",
-                          hintStyle: poppins.copyWith(
-                              color: Colors.black38, fontSize: 12)),
-                    ),
-                  ),
+                const SizedBox(height: 20),
+                // Email
+                CustomTextField(
+                  label: "Email:",
+                  controller: _emailController,
+                  hint: "example@gmail.com",
+                  isEmail: true,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "Password:",
-                  textAlign: TextAlign.start,
-                  style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                const SizedBox(height: 20),
+                // Password
+                PasswordField(
+                  label: "Password:",
+                  controller: _passwordController,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: textfieldclr),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 5),
-                    child: TextField(
-                      obscureText: hidden,
-                      decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  hidden = !hidden;
-                                });
-                              },
-                              icon: Icon(Icons.remove_red_eye)),
-                          border: InputBorder.none,
-                          hintText: "*********",
-                          hintStyle: poppins.copyWith(
-                              color: Colors.black38, fontSize: 12),
-                          contentPadding: const EdgeInsets.only(top: 15)),
-                    ),
-                  ),
+                const SizedBox(height: 20),
+                // Confirm Password
+                PasswordField(
+                  label: "Confirm Password:",
+                  controller: _confirmPasswordController,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 30),
-                child: Text(
-                  "Confirm Password:",
-                  textAlign: TextAlign.start,
-                  style: poppins.copyWith(
-                      fontSize: 14, fontWeight: FontWeight.bold),
+                const SizedBox(height: 20),
+                // Gender Selection
+                GenderSelection(
+                  gender: gender,
+                  onChanged: (value) {
+                    setState(() {
+                      gender = value;
+                    });
+                  },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: textfieldclr),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 5),
-                      child: TextField(
-                        obscureText: hidden,
-                        decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    hidden = !hidden;
-                                  });
-                                },
-                                icon: Icon(Icons.remove_red_eye)),
-                            border: InputBorder.none,
-                            hintText: "*********",
-                            hintStyle: poppins.copyWith(
-                                color: Colors.black38, fontSize: 12),
-                            contentPadding: const EdgeInsets.only(top: 15)),
-                      ),
-                    )),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    Radio(
-                        value: "Male",
-                        groupValue: country,
-                        onChanged: (val) {
-                          setState(() {
-                            country = val;
-                          });
-                        }),
-                    Text(
-                      "Male",
-                      style: poppins.copyWith(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Radio(
-                        value: "Female",
-                        groupValue: country,
-                        onChanged: (val) {
-                          setState(() {
-                            country = val;
-                          });
-                        }),
-                    Text(
-                      "Female",
-                      style: poppins.copyWith(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                const SizedBox(height: 20),
+                // Terms and Conditions Checkbox
+                TermsAndConditions(
+                  checked: checked,
+                  onChanged: (value) {
+                    setState(() {
+                      checked = value ?? false;
+                    });
+                  },
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  children: [
-                    Checkbox(
-                      value: checked,
-                      onChanged: checked_box,
-                    ),
-                    Text("Agree with "),
-                    Text(
-                      "Terms & Conditions",
-                      style: poppins.copyWith(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Colors.blue,
-                          decorationThickness: 2),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: TextButton(
+                const SizedBox(height: 30),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: TextButton(
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(backgroundColor),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => DefaultScreen(),
-                        ),
-                      );
-                    },
+                    onPressed: _signUp, // Call the sign-up function here
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 7.0),
                       child: Text(
@@ -342,64 +153,64 @@ class _SignupState extends State<Signup> {
                         style:
                             poppins.copyWith(color: Colors.white, fontSize: 14),
                       ),
-                    )),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Divider(height: 1, color: Colors.black)),
-                    Expanded(
-                        flex: 2,
-                        child: Text(
-                          "Or Sign up with",
-                          textAlign: TextAlign.center,
-                        )),
-                    Expanded(
-                        flex: 1,
-                        child: Divider(height: 1, color: Colors.black)),
-                  ],
-                ),
-              ),
-              signUpPlatform(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Already have an account? ",
-                      style: poppins.copyWith(color: Colors.black),
                     ),
-                    InkWell(
-                      overlayColor:
-                          MaterialStatePropertyAll(Colors.transparent),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                Login(), // Navigate to SignUpPage
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Sign in",
-                        style: poppins.copyWith(
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          flex: 1,
+                          child: Divider(height: 1, color: Colors.black)),
+                      Expanded(
+                          flex: 2,
+                          child: Text("Or Sign up with",
+                              textAlign: TextAlign.center)),
+                      Expanded(
+                          flex: 1,
+                          child: Divider(height: 1, color: Colors.black)),
+                    ],
+                  ),
+                ),
+                const signUpPlatform(),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have an account? ",
+                        style: poppins.copyWith(color: Colors.black),
+                      ),
+                      InkWell(
+                        overlayColor:
+                            MaterialStatePropertyAll(Colors.transparent),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Sign in",
+                          style: poppins.copyWith(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
                             decorationColor: Colors.blue,
-                            decorationThickness: 2),
+                            decorationThickness: 2,
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
