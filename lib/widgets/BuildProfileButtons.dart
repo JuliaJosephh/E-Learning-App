@@ -8,7 +8,7 @@ Widget buildprofilebutton(
   String buttontxt,
   Icon iconname,
   Icon firsticon, {
-  required VoidCallback onPressed, // Changed to VoidCallback for clarity
+  required VoidCallback onPressed, 
 }) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
@@ -17,7 +17,7 @@ Widget buildprofilebutton(
         overlayColor: MaterialStateProperty.all(Colors.transparent),
         backgroundColor: MaterialStateProperty.all(Colors.blueGrey[50]),
       ),
-      onPressed: onPressed, // Use the provided onPressed function
+      onPressed: onPressed, 
       child: Padding(
         padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
         child: Row(
@@ -30,7 +30,7 @@ Widget buildprofilebutton(
                 Text(
                   buttontxt,
                   style: poppins.copyWith(
-                    color: Colors.grey[800],
+                    color: IconColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),

@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 
-PreferredSizeWidget buildprofileappbar(BuildContext context) {
+PreferredSizeWidget BuildAccountInfoAppBar(BuildContext context) {
   return PreferredSize(
     preferredSize: const Size.fromHeight(250.0),
     child: AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      ),
       flexibleSpace: Container(
         decoration: BoxDecoration(
           color: backgroundColor,
@@ -28,13 +34,6 @@ PreferredSizeWidget buildprofileappbar(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.menu,
-                color: Colors.white,
-              ),
-            ),
             Center(
               child: Column(
                 children: [

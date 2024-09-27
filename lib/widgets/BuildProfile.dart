@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/screens/AccountInfoPage.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/loginPage.dart';
-import 'package:sessiontask/widgets/ProfileButtons.dart';
+import 'package:sessiontask/widgets/BuildProfileButtons.dart';
 
 Widget buildprofile(BuildContext context) {
   return Column(
@@ -16,7 +17,8 @@ Widget buildprofile(BuildContext context) {
         Icon(Icons.assignment_ind_rounded, color: IconColor),
         onPressed: () {
           // Add navigation for Account Info
-          // Navigator.push(context, MaterialPageRoute(builder: (context) => AccountInfoPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AccountInfoPage()));
         },
       ),
       const SizedBox(height: 20),
