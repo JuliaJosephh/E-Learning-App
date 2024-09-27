@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
-import 'package:sessiontask/screens/loginPage.dart';
+import 'package:sessiontask/screens/SplashScreenPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,8 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Login(),
+      home: SplashScreen(),
     );
   }
 }
-
