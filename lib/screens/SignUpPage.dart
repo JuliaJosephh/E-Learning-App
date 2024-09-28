@@ -9,6 +9,8 @@ import 'package:sessiontask/widgets/BuildTextField.dart';
 import 'package:sessiontask/widgets/platforms.dart';
 
 class Signup extends StatefulWidget {
+  const Signup({super.key});
+
   @override
   State<Signup> createState() => _SignupState();
 }
@@ -47,7 +49,7 @@ class _SignupState extends State<Signup> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Login(),
+                builder: (context) => const Login(),
               ),
             );
           },
@@ -143,7 +145,7 @@ class _SignupState extends State<Signup> {
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(backgroundColor),
+                          WidgetStateProperty.all(backgroundColor),
                     ),
                     onPressed: _signUp, // Call the sign-up function here
                     child: Padding(
@@ -185,12 +187,12 @@ class _SignupState extends State<Signup> {
                       ),
                       InkWell(
                         overlayColor:
-                            MaterialStatePropertyAll(Colors.transparent),
+                            const WidgetStatePropertyAll(Colors.transparent),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Login(),
+                              builder: (context) => const Login(),
                             ),
                           );
                         },

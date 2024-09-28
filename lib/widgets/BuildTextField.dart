@@ -7,7 +7,7 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final bool isEmail;
 
-  CustomTextField({
+  const CustomTextField({super.key, 
     required this.label,
     required this.controller,
     required this.hint,

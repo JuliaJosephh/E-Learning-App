@@ -5,7 +5,7 @@ class TermsAndConditions extends StatelessWidget {
   final bool checked;
   final ValueChanged<bool?> onChanged;
 
-  TermsAndConditions({required this.checked, required this.onChanged});
+  const TermsAndConditions({super.key, required this.checked, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

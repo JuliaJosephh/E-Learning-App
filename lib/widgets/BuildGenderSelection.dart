@@ -5,7 +5,7 @@ class GenderSelection extends StatelessWidget {
   final String? gender;
   final ValueChanged<String?> onChanged;
 
-  GenderSelection({required this.gender, required this.onChanged});
+  const GenderSelection({super.key, required this.gender, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {

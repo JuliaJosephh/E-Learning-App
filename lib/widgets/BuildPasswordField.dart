@@ -5,7 +5,7 @@ class PasswordField extends StatefulWidget {
   final String label;
   final TextEditingController controller;
 
-  PasswordField({
+  const PasswordField({super.key, 
     required this.label,
     required this.controller,
   });
@@ -47,7 +47,7 @@ class _PasswordFieldState extends State<PasswordField> {
                         hidden = !hidden;
                       });
                     },
-                    icon: Icon(Icons.remove_red_eye),
+                    icon: const Icon(Icons.remove_red_eye),
                   ),
                   border: InputBorder.none,
                   hintText: "*********",

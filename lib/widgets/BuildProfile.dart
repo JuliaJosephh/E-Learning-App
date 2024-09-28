@@ -45,7 +45,7 @@ Widget buildprofile(BuildContext context) {
           // Navigate to Login page (logout)
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Login()),
+            MaterialPageRoute(builder: (context) => const Login()),
           );
         },
       ),

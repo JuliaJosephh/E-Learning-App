@@ -6,6 +6,8 @@ import '../constants/constants.dart';
 import '../widgets/platforms.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   State<Login> createState() => _LoginState();
 }
@@ -141,7 +143,7 @@ class _LoginState extends State<Login> {
                   padding:
                       const EdgeInsets.only(top: 15.0, right: 25, left: 260),
                   child: InkWell(
-                    overlayColor: MaterialStatePropertyAll(Colors.transparent),
+                    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
                     onTap: () {
                       // Implement forget password functionality
                     },
@@ -166,14 +168,14 @@ class _LoginState extends State<Login> {
                   child: TextButton(
                     style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(backgroundColor)),
+                            WidgetStateProperty.all(backgroundColor)),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // If the form is valid, navigate to the DefaultScreen
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DefaultScreen(),
+                            builder: (context) => const DefaultScreen(),
                           ),
                         );
                       }
@@ -218,13 +220,13 @@ class _LoginState extends State<Login> {
                     ),
                     InkWell(
                       overlayColor:
-                          MaterialStatePropertyAll(Colors.transparent),
+                          const WidgetStatePropertyAll(Colors.transparent),
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                Signup(), // Navigate to SignUpPage
+                                const Signup(), // Navigate to SignUpPage
                           ),
                         );
                       },

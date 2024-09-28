@@ -14,8 +14,8 @@ Widget buildprofilebutton(
     padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5),
     child: TextButton(
       style: ButtonStyle(
-        overlayColor: MaterialStateProperty.all(Colors.transparent),
-        backgroundColor: MaterialStateProperty.all(Colors.blueGrey[50]),
+        overlayColor: WidgetStateProperty.all(Colors.transparent),
+        backgroundColor: WidgetStateProperty.all(Colors.blueGrey[50]),
       ),
       onPressed: onPressed, 
       child: Padding(
