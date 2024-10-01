@@ -44,7 +44,7 @@ PreferredSizeWidget BuildAccountInfoAppBar(BuildContext context) {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Julia Joseph',
+                    'Full Name',
                     style: poppins.copyWith(
                       fontSize: 20,
                       color: Colors.white,

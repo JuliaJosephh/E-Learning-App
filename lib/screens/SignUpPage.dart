@@ -20,7 +20,6 @@ class _SignupState extends State<Signup> {
   String? gender;
   final _formKey = GlobalKey<FormState>();
 
-  // Text editing controllers
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();

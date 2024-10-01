@@ -63,7 +63,6 @@ class _LoginState extends State<Login> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 5),
                       child: TextFormField(
-                        // Use TextFormField for validation
                         controller: _emailController,
                         decoration: InputDecoration(
                             border: InputBorder.none,
@@ -74,7 +73,6 @@ class _LoginState extends State<Login> {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
                           }
-                          // Basic email validation
                           String pattern =
                               r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                           RegExp regExp = RegExp(pattern);
@@ -145,7 +143,7 @@ class _LoginState extends State<Login> {
                   child: InkWell(
                     overlayColor: const WidgetStatePropertyAll(Colors.transparent),
                     onTap: () {
-                      // Implement forget password functionality
+                      // forget password functionality
                     },
                     child: Text(
                       "forgot Password?",
@@ -226,7 +224,7 @@ class _LoginState extends State<Login> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const Signup(), // Navigate to SignUpPage
+                                const Signup(), 
                           ),
                         );
                       },
