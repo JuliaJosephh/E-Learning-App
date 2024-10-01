@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/SignUpPage.dart';
+import 'package:sessiontask/screens/forgetpassword.dart';
 
 import '../constants/constants.dart';
 import '../widgets/platforms.dart';
@@ -141,12 +142,17 @@ class _LoginState extends State<Login> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 15.0, right: 25, left: 260),
+                      const EdgeInsets.only(top: 15.0, right: 25, left: 20),
                   child: InkWell(
                     overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-                    onTap: () {
-                      // Implement forget password functionality
-                    },
+                  onTap: () {
+  setState(() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Forgetpassword()),
+    );
+  });
+},
                     child: Text(
                       "forgot Password?",
                       style: poppins.copyWith(
