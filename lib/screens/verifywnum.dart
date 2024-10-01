@@ -66,7 +66,7 @@ class Verifywnum extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Otp()));
+                    context, MaterialPageRoute(builder: (context) => const Otp()));
               },
               style: const ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(backgroundColor)),

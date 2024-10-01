@@ -70,7 +70,7 @@ class Forgetpassword extends StatelessWidget {
               overlayColor: WidgetStateColor.transparent,
               onTap: (){
             
-              Navigator.push(context, MaterialPageRoute(builder:(context)=>Verifywnum() ));
+              Navigator.push(context, MaterialPageRoute(builder:(context)=>const Verifywnum() ));
             
             }, child: Text("Verify Using Number",textAlign: TextAlign.center,style: poppins.copyWith(color: backgroundColor,fontWeight: FontWeight.bold),)),
           )

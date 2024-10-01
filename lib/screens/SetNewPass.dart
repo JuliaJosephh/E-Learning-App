@@ -7,6 +7,8 @@ class Setnewpass extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+
+  Setnewpass({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,9 +22,9 @@ class Setnewpass extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0,top: 20),
-            child: const Text(
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0,top: 20),
+            child: Text(
               "Set Password",
               style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
@@ -43,7 +45,7 @@ class Setnewpass extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Login()));
+                    context, MaterialPageRoute(builder: (context) => const Login()));
               },
               style: const ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(backgroundColor)),

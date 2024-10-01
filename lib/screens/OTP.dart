@@ -33,7 +33,7 @@ class Otp extends StatelessWidget {
             const SizedBox(height: 40),
             OtpTextField(
               numberOfFields: 5,
-              borderColor: Color(0xFF512DA8),
+              borderColor: const Color(0xFF512DA8),
               //set to true to show as box or false to show as dash
               showFieldAsBox: true,
               //runs when a code is typed in

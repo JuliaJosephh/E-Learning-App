@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:sessiontask/screens/LoginPage.dart';
@@ -29,15 +31,19 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            Stack(
-              alignment: Alignment.center,
+            Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Image.asset(
                   'images/E-Learning-Logo.png',
                   width: 300,
                   height: 300,
                 ),
-                const CircularProgressIndicator(color: Colors.blue),
+                SizedBox(height: 50,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                  child: const LinearProgressIndicator(color: Colors.blue),
+                ),
               ],
             ),
           ],
