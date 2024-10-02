@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'dart:async';
 import 'package:sessiontask/screens/LoginPage.dart';
 
@@ -17,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Login()),
+        MaterialPageRoute(builder: (context) => FirebaseAuth.instance.currentUser==null?const Login():DefaultScreen()),
       );
     });
   }

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/SignUpPage.dart';
@@ -71,19 +72,19 @@ class _LoginState extends State<Login> {
                             hintText: "example@gmail.com",
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          // Basic email validation
-                          String pattern =
-                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                          RegExp regExp = RegExp(pattern);
-                          if (!regExp.hasMatch(value)) {
-                            return 'Enter a valid email';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your email';
+                        //   }
+                        //   // Basic email validation
+                        //   String pattern =
+                        //       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                        //   RegExp regExp = RegExp(pattern);
+                        //   if (!regExp.hasMatch(value)) {
+                        //     return 'Enter a valid email';
+                        //   }
+                        //   return null;
+                        // },
                       ),
                     ),
                   ),
@@ -127,15 +128,15 @@ class _LoginState extends State<Login> {
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12),
                             contentPadding: const EdgeInsets.only(top: 15)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your password';
+                        //   }
+                        //   if (value.length < 6) {
+                        //     return 'Password must be at least 6 characters';
+                        //   }
+                        //   return null;
+                        // },
                       ),
                     ),
                   ),
@@ -175,15 +176,28 @@ class _LoginState extends State<Login> {
                     style: ButtonStyle(
                         backgroundColor:
                             WidgetStateProperty.all(backgroundColor)),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        // If the form is valid, navigate to the DefaultScreen
-                        Navigator.push(
+                        try {
+  final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: _emailController.text,
+    password: _passwordController.text
+  );
+    Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const DefaultScreen(),
                           ),
                         );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'user-not-found') {
+    print('No user found for that email.');
+  } else if (e.code == 'wrong-password') {
+    print('Wrong password provided for that user.');
+  }
+}
+                        // If the form is valid, navigate to the DefaultScreen
+                      
                       }
                     },
                     child: Padding(

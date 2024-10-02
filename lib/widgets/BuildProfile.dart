@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/AccountInfoPage.dart';
@@ -41,7 +42,9 @@ Widget buildprofile(BuildContext context) {
         "Logout",
         Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
         Icon(Icons.logout_outlined, color: IconColor),
-        onPressed: () {
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+
           // Navigate to Login page (logout)
           Navigator.pushReplacement(
             context,
