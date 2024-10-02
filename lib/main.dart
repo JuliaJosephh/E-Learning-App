@@ -12,7 +12,7 @@ void main() async {
   );
   runApp(const MyApp());
 
-  // Const
+  // Const // Improve performance 
   // Mounted
   // Responsive
 }

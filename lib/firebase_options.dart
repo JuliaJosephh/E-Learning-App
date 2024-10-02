@@ -64,7 +64,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '430820266411',
     projectId: 'e-learning-app-ddf1f',
     storageBucket: 'e-learning-app-ddf1f.appspot.com',
-    iosBundleId: 'com.example.sessiontask',
+    iosBundleId: 'com.project.E_learningapp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '430820266411',
     projectId: 'e-learning-app-ddf1f',
     storageBucket: 'e-learning-app-ddf1f.appspot.com',
-    iosBundleId: 'com.example.sessiontask',
+    iosBundleId: 'com.project.E_learningapp',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

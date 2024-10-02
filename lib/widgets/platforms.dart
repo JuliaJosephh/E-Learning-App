@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class signUpPlatform extends StatelessWidget {
   const signUpPlatform({
     super.key,
@@ -19,8 +18,8 @@ class signUpPlatform extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(width: 1, color: Colors.black38)),
             child: IconButton(
-              onPressed: () {
-                launchURL("https://appleid.apple.com/");
+              onPressed: () async {
+                await launchURL("https://appleid.apple.com/");
               },
               icon: Image.asset(
                 "images/apple-logo.png",
@@ -37,8 +36,8 @@ class signUpPlatform extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(width: 1, color: Colors.black38)),
             child: IconButton(
-              onPressed: () {
-                launchURL("https://accounts.google.com/login");
+              onPressed: () async {
+                await launchURL("https://accounts.google.com/login");
               },
               icon: Image.asset(
                 "images/google.png",
@@ -55,8 +54,8 @@ class signUpPlatform extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(width: 1, color: Colors.black38)),
             child: IconButton(
-              onPressed: () {
-                launchURL("https://www.facebook.com/");
+              onPressed: () async {
+                await launchURL("https://www.facebook.com/");
               },
               icon: Image.asset(
                 "images/facebook-logo.png",
@@ -70,10 +69,9 @@ class signUpPlatform extends StatelessWidget {
     );
   }
 }
+
 Future<void> launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url); 
-  } else {
-    throw 'Could not launch $url'; 
+  if (!await launchUrl(Uri.parse(url))) {
+    throw Exception('Could not launch $url');
   }
 }
