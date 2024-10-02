@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
@@ -29,14 +30,33 @@ class _SignupState extends State<Signup> {
   final TextEditingController _confirmPasswordController =
       TextEditingController();
 
-  void _signUp() {
+  Future<void> _signUp() async {
+    if (!checked) {
+      debugPrint("Terms is not checked");
+      return;
+    }
     if (_formKey.currentState!.validate()) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DefaultScreen(),
-        ),
-      );
+      try {
+        final credential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const DefaultScreen(),
+          ),
+        );
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {
+        print(e);
+      }
     }
   }
 
@@ -144,8 +164,7 @@ class _SignupState extends State<Signup> {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: TextButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          WidgetStateProperty.all(backgroundColor),
+                      backgroundColor: WidgetStateProperty.all(backgroundColor),
                     ),
                     onPressed: _signUp, // Call the sign-up function here
                     child: Padding(
