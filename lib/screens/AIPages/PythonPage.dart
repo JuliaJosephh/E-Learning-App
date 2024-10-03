@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/AIContent/PythonbasicsContent.dart';
+import 'package:sessiontask/Content/AIContent/PythonbasicsContent.dart';
+import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/CodeBox.dart';
 
 class PythonPage extends StatelessWidget {
@@ -17,7 +18,7 @@ class PythonPage extends StatelessWidget {
         ),
         title: const Text('Python',
             style: TextStyle(fontSize: 14, color: Colors.white)),
-        backgroundColor: Colors.blue,
+        backgroundColor: backgroundColor,
       ),
       body: ListView.builder(
         itemCount: pythonBasics.length,

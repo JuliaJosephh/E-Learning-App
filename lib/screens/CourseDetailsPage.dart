@@ -14,7 +14,6 @@ class CourseDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get the height of the screen minus the app bar height
     final double availableHeight = MediaQuery.of(context).size.height -
         AppBar().preferredSize.height -
         MediaQuery.of(context).padding.top;
@@ -43,20 +42,20 @@ class CourseDetailsPage extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    "Course Chapters List",
-                    style: poppins.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      "Course Chapters List",
+                      style: poppins.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 25),
-                  Expanded(
-                    child: Container(
+                    const SizedBox(height: 25),
+                    Container(
                       height: availableHeight,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -94,8 +93,8 @@ class CourseDetailsPage extends StatelessWidget {
                               }).toList(),
                             ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

@@ -15,7 +15,6 @@ import 'package:sessiontask/screens/MobilePages/IntroToFlutterPage.dart';
 import 'package:sessiontask/screens/MobilePages/DartProgrammingPage.dart';
 import 'package:sessiontask/screens/MobilePages/FlutterWidgetsPage.dart';
 import 'package:sessiontask/screens/MobilePages/APIIntegrationPage.dart';
-import 'package:sessiontask/screens/MobilePages/BuildingForIOSandAndroidPage.dart';
 import 'package:sessiontask/screens/MobilePages/FlutterpackagesPluginsPage.dart';
 import 'package:sessiontask/screens/MobilePages/LocalDataStoragePage.dart';
 import 'package:sessiontask/screens/MobilePages/NavigationPage.dart';
@@ -33,19 +32,19 @@ final List<Map<String, dynamic>> aiChapters = [
   {
     'index': 2,
     'title': 'Python libraries: Pandas',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const PandasPage()
   },
   {
     'index': 3,
     'title': 'Python libraries: NumPy',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const NumpyPage()
   },
   {
     'index': 4,
     'title': 'Machine Learning',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const MachineLearningPage()
   },
 ];
@@ -113,12 +112,6 @@ final List<Map<String, dynamic>> mobileDevChapters = [
   },
   {
     'index': 9,
-    'title': 'Building for IOS & Android',
-    'isLocked': false,
-    'Page': const BuildingForIOSandAndroidPage()
-  },
-  {
-    'index': 10,
     'title': 'Publishing to App Store',
     'isLocked': false,
     'Page': const PublishingToAppStorePage()

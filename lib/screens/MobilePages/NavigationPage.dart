@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sessiontask/Content/FlutterContent/NavigationContent.dart';
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/widgets/CodeBox.dart';
 
 class NavigationPage extends StatelessWidget {
   const NavigationPage({super.key});
@@ -18,9 +20,44 @@ class NavigationPage extends StatelessWidget {
             style: poppins.copyWith(fontSize: 14, color: Colors.white)),
         backgroundColor: backgroundColor,
       ),
-      body: Center(
-        child: Text('Welcome to the Navigation page!',
-            style: poppins.copyWith(fontSize: 14)),
+      body: ListView.builder(
+        itemCount: navigationContent.length,
+        itemBuilder: (context, index) {
+          final item = navigationContent[index];
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 4.0,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['title'],
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      item['content'],
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 10),
+                    if (item['code'] != null)
+                      CodeBox(
+                        code: item['code'],
+                        language: "Dart",
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

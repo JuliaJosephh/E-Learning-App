@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/IntrotoFlutterContent.dart';
+import 'package:sessiontask/constants/constants.dart'; 
+import 'package:sessiontask/widgets/CodeBox.dart';
 
 class IntroToFlutterPage extends StatelessWidget {
   const IntroToFlutterPage({super.key});
@@ -14,13 +16,50 @@ class IntroToFlutterPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Intro to Flutter',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
+        title: Text(
+          'Intro to Flutter',
+          style: poppins.copyWith(fontSize: 14, color: Colors.white),
+        ),
         backgroundColor: backgroundColor,
       ),
-      body: Center(
-        child: Text('Welcome to the Intro to Flutter page!',
-            style: poppins.copyWith(fontSize: 14)),
+      body: ListView.builder(
+        itemCount: flutterContent.length,
+        itemBuilder: (context, index) {
+          final item = flutterContent[index];
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 4.0,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['title'],
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      item['content'],
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 10),
+                    if (item['code'] != null)
+                      CodeBox(
+                        code: item['code'],
+                        language: "Dart",
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
