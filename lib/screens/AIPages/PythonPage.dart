@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/AIContent/PythonbasicsContent.dart';
+import 'package:sessiontask/widgets/CodeBox.dart';
 
 class PythonPage extends StatelessWidget {
   const PythonPage({super.key});
@@ -14,13 +15,48 @@ class PythonPage extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Python',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
+        title: const Text('Python',
+            style: TextStyle(fontSize: 14, color: Colors.white)),
+        backgroundColor: Colors.blue,
       ),
-      body: Center(
-        child: Text('Welcome to the Python page!',
-            style: poppins.copyWith(fontSize: 14)),
+      body: ListView.builder(
+        itemCount: pythonBasics.length,
+        itemBuilder: (context, index) {
+          final item = pythonBasics[index];
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              elevation: 4.0,
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item['title'],
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      item['content'],
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 10),
+                    if (item['code'] != null)
+                      CodeBox(
+                        code: item['code'],
+                        language: "Python",
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
