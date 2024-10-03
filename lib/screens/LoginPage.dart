@@ -73,19 +73,19 @@ class _LoginState extends State<Login> {
                             hintText: "example@gmail.com",
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          // Basic email validation
-                          String pattern =
-                              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
-                          RegExp regExp = RegExp(pattern);
-                          if (!regExp.hasMatch(value)) {
-                            return 'Enter a valid email';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your email';
+                        //   }
+                        //   // Basic email validation
+                        //   String pattern =
+                        //       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
+                        //   RegExp regExp = RegExp(pattern);
+                        //   if (!regExp.hasMatch(value)) {
+                        //     return 'Enter a valid email';
+                        //   }
+                        //   return null;
+                        // },
                       ),
                     ),
                   ),
@@ -129,15 +129,15 @@ class _LoginState extends State<Login> {
                             hintStyle: poppins.copyWith(
                                 color: Colors.black38, fontSize: 12),
                             contentPadding: const EdgeInsets.only(top: 15)),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your password';
-                          }
-                          if (value.length < 6) {
-                            return 'Password must be at least 6 characters';
-                          }
-                          return null;
-                        },
+                        // validator: (value) {
+                        //   if (value == null || value.isEmpty) {
+                        //     return 'Please enter your password';
+                        //   }
+                        //   if (value.length < 6) {
+                        //     return 'Password must be at least 6 characters';
+                        //   }
+                        //   return null;
+                        // },
                       ),
                     ),
                   ),
@@ -196,25 +196,26 @@ class _LoginState extends State<Login> {
                           if (e.code == 'user-not-found') {
                             debugPrint('No user found for that email.');
                             AwesomeDialog(
-            context: context,
-            dialogType: DialogType.info,
-            animType: AnimType.rightSlide,
-            title: 'Error',
-            desc: 'No user found for that email.',  
-            ).show();
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Error',
+                              desc: 'No user found for that email.',
+                            ).show();
                           } else if (e.code == 'wrong-password') {
-                            debugPrint('Wrong password provided for that user.');
-                             AwesomeDialog(
-            context: context,
-            dialogType: DialogType.info,
-            animType: AnimType.rightSlide,
-            title: 'Error',
-            desc: 'Wrong password provided for that user.',  
-            ).show();
+                            debugPrint(
+                                'Wrong password provided for that user.');
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.error,
+                              animType: AnimType.rightSlide,
+                              title: 'Error',
+                              desc: 'Wrong password provided for that user.',
+                            ).show();
                           }
                         }
-                        // If the form is valid, navigate to the DefaultScreen
-                      }
+                      } 
+                      // If the form is valid, navigate to the DefaultScreen
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 7.0),

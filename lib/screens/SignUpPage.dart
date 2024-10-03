@@ -31,8 +31,30 @@ class _SignupState extends State<Signup> {
       TextEditingController();
 
   Future<void> _signUp() async {
+if(_formKey.currentState!.validate()){
+
+  try {
+  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email: _emailController.text,
+    password: _passwordController.text,
+  );
+} on FirebaseAuthException catch (e) {
+  if (e.code == 'weak-password') {
+    print('The password provided is too weak.');
+  } else if (e.code == 'email-already-in-use') {
+    print('The account already exists for that email.');
+  }
+} catch (e) {
+  print(e);
+}
+}
+
+
+
+
     if (!checked) {
       debugPrint("Terms is not checked");
+
       return;
     }
     if (_formKey.currentState!.validate()) {
