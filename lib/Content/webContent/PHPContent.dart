@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> phpContent = [
+const List<Map<String, dynamic>> phpContent = [
   {
     'title': 'PHP Introduction',
     'content': '''

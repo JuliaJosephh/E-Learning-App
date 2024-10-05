@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/Content/FlutterContent/PublishingtoAppStoreContent.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/CodeBox.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PublishingToAppStorePage extends StatelessWidget {
   const PublishingToAppStorePage({super.key});
@@ -52,6 +53,20 @@ class PublishingToAppStorePage extends StatelessWidget {
                         code: item['code'],
                         language: "Dart",
                       ),
+                    const SizedBox(height: 10),
+                    if (item['url'] != null)
+                      GestureDetector(
+                        onTap: () {
+                          launchURL(item['url']);
+                        },
+                        child: const Text(
+                          'Learn More',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -60,5 +75,9 @@ class PublishingToAppStorePage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void launchURL(String url) {
+    launch(url);
   }
 }

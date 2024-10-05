@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> MLContent = [
+const List<Map<String, dynamic>> MLContent = [
   {
     "title": "1. Linear Regression",
     "content": """

@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> pandasContent = [
+const List<Map<String, dynamic>> pandasContent = [
   {
     "title": "1. Introduction to Pandas",
     "content": """

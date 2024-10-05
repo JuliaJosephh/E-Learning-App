@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> JSContent = [
+const List<Map<String, dynamic>> JSContent = [
   {
     "title": "1. JavaScript Introduction",
     "content": """

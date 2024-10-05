@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> NumPyContent = [
+const List<Map<String, dynamic>> NumPyContent = [
   {
     "title": "1. Introduction to NumPy",
     "content": """

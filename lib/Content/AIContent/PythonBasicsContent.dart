@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> pythonBasics = [
+const List<Map<String, dynamic>> pythonBasicsContent = [
   {
     "title": "1. Setting Up Python",
     "content": """

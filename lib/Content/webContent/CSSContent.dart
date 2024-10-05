@@ -1,4 +1,4 @@
-final List<Map<String, dynamic>> CSSContent = [
+const List<Map<String, dynamic>> CSSContent = [
   {
     "title": "1. What is CSS?",
     "content": """

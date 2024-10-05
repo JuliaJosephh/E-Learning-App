@@ -1,69 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/Content/AIContent/NumPyContent.dart';
-import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/CodeBox.dart';
+import 'package:sessiontask/quizzes/AIQuizzes/NumPyQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class NumpyPage extends StatelessWidget {
-  const NumpyPage({super.key});
-
-  @override
+class NumPyPage extends StatelessWidget {
+  const NumPyPage({super.key});
+  
+@override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text(
-          'NumPy',
-          style: poppins.copyWith(fontSize: 14, color: Colors.white),
-        ),
-        backgroundColor: backgroundColor,
-      ),
-      body: ListView.builder(
-        itemCount: NumPyContent.length, 
-        itemBuilder: (context, index) {
-          final item = NumPyContent[index];
-
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 4.0,
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item['title'],
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-
-                    Text(
-                      item['content'],
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                    const SizedBox(height: 10),
-
-                    if (item['code'] != null)
-                      CodeBox(
-                        code: item['code'],
-                        language: "Python",
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
-      ),
+    return const ContentPage(
+      content: NumPyContent, // Pass the content
+      questions: NumPyQuestions, // Pass the questions
+      title: 'NumPy', // Pass the title
     );
   }
 }
-

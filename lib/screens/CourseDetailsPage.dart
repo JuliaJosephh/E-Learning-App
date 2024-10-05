@@ -14,10 +14,6 @@ class CourseDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double availableHeight = MediaQuery.of(context).size.height -
-        AppBar().preferredSize.height -
-        MediaQuery.of(context).padding.top;
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -32,7 +28,7 @@ class CourseDetailsPage extends StatelessWidget {
           style: poppins.copyWith(color: Colors.white, fontSize: 16),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -42,59 +38,35 @@ class CourseDetailsPage extends StatelessWidget {
             ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      "Course Chapters List",
-                      style: poppins.copyWith(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Course Chapters List",
+                    style: poppins.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  // Create a list of chapter buttons
+                  for (var chapter in chapters)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Container(
+                        width: double
+                            .infinity, // Make sure the button takes full width
+                        child: buildLockedButton(
+                          context,
+                          chapter['index'],
+                          chapter['title'],
+                          chapter['isLocked'],
+                          chapter['Page'],
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 25),
-                    Container(
-                      height: availableHeight,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: chapters.length > 6
-                          ? ListView.builder(
-                              itemCount: chapters.length,
-                              itemBuilder: (context, index) {
-                                final chapter = chapters[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: buildLockedButton(
-                                    context,
-                                    chapter['index'],
-                                    chapter['title'],
-                                    chapter['isLocked'],
-                                    chapter['Page'],
-                                  ),
-                                );
-                              },
-                            )
-                          : Column(
-                              children: chapters.map((chapter) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: buildLockedButton(
-                                    context,
-                                    chapter['index'],
-                                    chapter['title'],
-                                    chapter['isLocked'],
-                                    chapter['Page'],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                    ),
-                  ],
-                ),
+                ],
               ),
             ),
           ),
