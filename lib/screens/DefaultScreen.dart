@@ -17,7 +17,7 @@ class _HomeScreenState extends State<DefaultScreen> {
   final List<Widget> pages = [
     const HomePage(), 
     const ChatPage(),
-    const ProfilePage(userId: '123',), 
+    const ProfilePage(), 
   ];
 
   @override

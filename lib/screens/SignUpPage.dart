@@ -32,34 +32,67 @@ class _SignupState extends State<Signup> {
       TextEditingController();
   final TextEditingController _phonecontroller = TextEditingController();
   final TextEditingController _gendercontroller = TextEditingController();
-
- Future<void> _signUp() async {
+Future<void> _signUp() async {
+  void _showErrorDialog(String errorMessage) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.error,
+    animType: AnimType.rightSlide,
+    title: 'Error',
+    desc: errorMessage,
+  ).show();
+}
   if (!_formKey.currentState!.validate()) {
     return; // If form is not valid, don't proceed
   }
 
+  // Check if the terms and conditions checkbox is checked
   if (!checked) {
-    debugPrint("Terms is not checked");
+    _showErrorDialog('Please accept the terms and conditions to proceed.');
+    return;
+  }
+
+  // Check if passwords match
+  if (_passwordController.text != _confirmPasswordController.text) {
+    _showErrorDialog('Passwords do not match. Please try again.');
     return;
   }
 
   String errorMessage = 'An unknown error occurred.';
   try {
+    // Check if the username already exists
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('User_Info')
+        .where('username', isEqualTo: _usernameController.text)
+        .get();
+
+    final List<DocumentSnapshot> documents = result.docs;
+
+    if (documents.isNotEmpty) {
+      // If there is a document with the same username, show an error message
+      _showErrorDialog('The username is already taken. Please choose another.');
+      return;
+    }
+
     // Sign up with FirebaseAuth
     final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: _emailController.text,
       password: _passwordController.text,
     );
 
-    // If sign-up is successful, store user information in Firestore
+    // If sign-up is successful, get the user ID (uid)
+    String uid = credential.user!.uid;
+
+    // Store user information in Firestore using the uid as the document ID
     CollectionReference collref = FirebaseFirestore.instance.collection("User_Info");
-    await collref.add({
-      "FullName": _fullNameController.text,  // Using .text to get the value
+    await collref.doc(uid).set({
+      "FullName": _fullNameController.text,
       "username": _usernameController.text,
       "email": _emailController.text,
       "gender": _gendercontroller.text,
       "mobileNumber": _phonecontroller.text,
-      "password": _passwordController.text,  // Consider hashing passwords for security
+      "password": _passwordController.text, // Consider hashing passwords for security
+      "createdAt": DateTime.now(),
     });
 
     // Navigate to DefaultScreen on successful sign-up
@@ -85,16 +118,6 @@ class _SignupState extends State<Signup> {
   }
 }
 
-// Helper function to show error dialog
-void _showErrorDialog(String errorMessage) {
-  AwesomeDialog(
-    context: context,
-    dialogType: DialogType.error,
-    animType: AnimType.rightSlide,
-    title: 'Error',
-    desc: errorMessage,
-  ).show();
-}
 
 
   @override

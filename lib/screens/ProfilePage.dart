@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -7,13 +9,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/constants/themeprovider.dart';
-import 'package:sessiontask/constants/utils.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
 
 class ProfilePage extends StatefulWidget {
-  final String userId; // Pass the userId as a parameter
-
-  const ProfilePage({super.key, required this.userId});
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -21,36 +20,84 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Uint8List? _image;
+  bool _imageExists = false;
+  String _fullName = 'Loading...'; // Initialize with a loading text
+
+  Future<void> checkUserProfile() async {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+    if (uid == null) return; // User is not logged in
+
+    // Fetch the user document from Firestore to check for an existing profile image
+    DocumentSnapshot userDoc =
+        await FirebaseFirestore.instance.collection("User_Info").doc(uid).get();
+
+    if (userDoc.exists) {
+      var userData = userDoc.data() as Map<String, dynamic>;
+      String? profileImage = userData['profileImageUrl'] as String?;
+      String? fullName = userData['FullName'] as String?;
+
+      // Check and set profile image
+      if (profileImage != null) {
+        setState(() {
+          _image = base64Decode(profileImage); // Decode Base64 to Uint8List
+          _imageExists = true; // Set flag to indicate the image exists
+        });
+      }
+
+      // Check and set Full Name
+      if (fullName != null) {
+        setState(() {
+          _fullName = fullName; // Update the Full Name state variable
+        });
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
-    loadImage(); // Load the image for the specific user when the page initializes
+    checkUserProfile(); // Check user profile on initialization
   }
 
-  void selectimage() async {
-    Uint8List img = await pickimage(ImageSource.gallery);
-    setState(() {
-      _image = img;
-    });
-    await saveImage(img); // Save the image after it is selected
+  void selectImage() async {
+    // Prompt user to take a photo with the camera or pick from gallery
+    final ImagePicker picker = ImagePicker();
+    XFile? imageFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (imageFile != null) {
+      Uint8List img =
+          await imageFile.readAsBytes(); // Read the selected image as bytes
+      setState(() {
+        _image = img; // Update the UI
+        _imageExists = true; // Update the flag to indicate the image now exists
+      });
+      await saveImage(img); // Save the image after it is selected
+      await uploadImageToFirestore(img); // Upload image to Firestore
+    }
+  }
+
+  Future<void> uploadImageToFirestore(Uint8List image) async {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+
+    if (uid == null) {
+      throw Exception("User is not logged in");
+    }
+
+    String base64Image = base64Encode(image);
+    await FirebaseFirestore.instance.collection("User_Info").doc(uid).set({
+      'profileImageUrl': base64Image, // Store base64 image string in Firestore
+    }, SetOptions(merge: true)); // Merge to avoid overwriting other fields
   }
 
   Future<void> saveImage(Uint8List image) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String base64Image = base64Encode(image);
-    // Save the image using a key that includes the user's ID
-    await prefs.setString('profile_image_${widget.userId}', base64Image);
-  }
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
 
-  Future<void> loadImage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Load the image using the key that includes the user's ID
-    String? base64Image = prefs.getString('profile_image_${widget.userId}');
-    if (base64Image != null) {
-      setState(() {
-        _image = base64Decode(base64Image); // Decode Base64 to Uint8List
-      });
+    if (uid != null) {
+      // Save the image using a key that includes the user's Firebase ID
+      await prefs.setString('profile_image_$uid', base64Image);
     }
   }
 
@@ -85,17 +132,18 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  icon: Provider.of<ThemeProvider>(context).themeData == lightmode
-                      ? const Icon(
-                          Icons.nightlight_round,
-                          color: Colors.black,
-                          size: 30,
-                        )
-                      : const Icon(
-                          Icons.sunny,
-                          color: Colors.white,
-                          size: 30,
-                        ),
+                  icon:
+                      Provider.of<ThemeProvider>(context).themeData == lightmode
+                          ? const Icon(
+                              Icons.nightlight_round,
+                              color: Colors.black,
+                              size: 30,
+                            )
+                          : const Icon(
+                              Icons.sunny,
+                              color: Colors.white,
+                              size: 30,
+                            ),
                   onPressed: () {
                     Provider.of<ThemeProvider>(context, listen: false)
                         .toggleTheme();
@@ -104,10 +152,26 @@ class _ProfilePageState extends State<ProfilePage> {
                 Center(
                   child: Column(
                     children: [
-                      _image != null
-                          ? CircleAvatar(
-                              radius: 60,
-                              backgroundImage: MemoryImage(_image!),
+                      _imageExists // Check if the image exists
+                          ? Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 60,
+                                  backgroundImage: MemoryImage(_image!),
+                                ),
+                                Positioned(
+                                  bottom: -10,
+                                  right: -5,
+                                  child: IconButton(
+                                    onPressed: selectImage, // Change photo button
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                      size: 20,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             )
                           : Stack(
                               children: [
@@ -121,11 +185,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottom: -10,
                                   right: -5,
                                   child: IconButton(
-                                    onPressed: selectimage,
+                                    onPressed: selectImage, // Call selectImage on press
                                     icon: const Icon(
                                       Icons.add_a_photo,
                                       color: Colors.white,
-                                      size: 30,
+                                      size: 20,
                                     ),
                                   ),
                                 ),
@@ -133,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                       const SizedBox(height: 10),
                       Text(
-                        'Julia Joseph',
+                        _fullName, // Display the fetched user's Full Name
                         style: poppins.copyWith(
                           fontSize: 20,
                           color: Colors.white,
@@ -152,7 +216,7 @@ class _ProfilePageState extends State<ProfilePage> {
         padding: const EdgeInsets.all(10.0),
         children: [
           const SizedBox(height: 10),
-          buildprofile(context),
+          buildprofile(context), // Your existing buildprofile function
         ],
       ),
     );
