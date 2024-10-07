@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
@@ -18,69 +20,82 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   bool checked = false;
-  String? gender;
+  String? selectedGender;
   final _formKey = GlobalKey<FormState>();
 
   // Text editing controllers
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _fullNameController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _phonecontroller = TextEditingController();
+  final TextEditingController _gendercontroller = TextEditingController();
 
-  Future<void> _signUp() async {
-if(_formKey.currentState!.validate()){
+ Future<void> _signUp() async {
+  if (!_formKey.currentState!.validate()) {
+    return; // If form is not valid, don't proceed
+  }
 
+  if (!checked) {
+    debugPrint("Terms is not checked");
+    return;
+  }
+
+  String errorMessage = 'An unknown error occurred.';
   try {
-  final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: _emailController.text,
-    password: _passwordController.text,
-  );
-} on FirebaseAuthException catch (e) {
-  if (e.code == 'weak-password') {
-    print('The password provided is too weak.');
-  } else if (e.code == 'email-already-in-use') {
-    print('The account already exists for that email.');
-  }
-} catch (e) {
-  print(e);
-}
-}
+    // Sign up with FirebaseAuth
+    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
 
+    // If sign-up is successful, store user information in Firestore
+    CollectionReference collref = FirebaseFirestore.instance.collection("User_Info");
+    await collref.add({
+      "FullName": _fullNameController.text,  // Using .text to get the value
+      "username": _usernameController.text,
+      "email": _emailController.text,
+      "gender": _gendercontroller.text,
+      "mobileNumber": _phonecontroller.text,
+      "password": _passwordController.text,  // Consider hashing passwords for security
+    });
 
-
-
-    if (!checked) {
-      debugPrint("Terms is not checked");
-
-      return;
+    // Navigate to DefaultScreen on successful sign-up
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const DefaultScreen(),
+      ),
+    );
+  } on FirebaseAuthException catch (e) {
+    // FirebaseAuth-specific error handling
+    if (e.code == 'weak-password') {
+      errorMessage = 'The password provided is too weak.';
+    } else if (e.code == 'email-already-in-use') {
+      errorMessage = 'The account already exists for that email.';
     }
-    if (_formKey.currentState!.validate()) {
-      try {
-        final credential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _emailController.text,
-          password: _passwordController.text,
-        );
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DefaultScreen(),
-          ),
-        );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
-        } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
-        }
-      } catch (e) {
-        print(e);
-      }
-    }
+    _showErrorDialog(errorMessage);
+  } catch (e) {
+    // General error handling
+    print(e);
+    errorMessage = 'An error occurred: $e';
+    _showErrorDialog(errorMessage);
   }
+}
+
+// Helper function to show error dialog
+void _showErrorDialog(String errorMessage) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.error,
+    animType: AnimType.rightSlide,
+    title: 'Error',
+    desc: errorMessage,
+  ).show();
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -122,23 +137,24 @@ if(_formKey.currentState!.validate()){
                 const SizedBox(height: 40),
                 // First Name
                 CustomTextField(
-                  label: "First Name:",
-                  controller: _firstNameController,
-                  hint: "First Name",
+                  label: "Full Name:",
+                  controller: _fullNameController,
+                  hint: "Full Name",
                 ),
-                const SizedBox(height: 20),
-                // Last Name
-                CustomTextField(
-                  label: "Last Name:",
-                  controller: _lastNameController,
-                  hint: "Last Name",
-                ),
+
                 const SizedBox(height: 20),
                 // Username
                 CustomTextField(
                   label: "User Name:",
                   controller: _usernameController,
                   hint: "User Name",
+                ),
+                const SizedBox(height: 20),
+                // Username
+                CustomTextField(
+                  label: " Phone Number:",
+                  controller: _phonecontroller,
+                  hint: "Phone Number",
                 ),
                 const SizedBox(height: 20),
                 // Email
@@ -163,10 +179,12 @@ if(_formKey.currentState!.validate()){
                 const SizedBox(height: 20),
                 // Gender Selection
                 GenderSelection(
-                  gender: gender,
+                  gender: selectedGender,
                   onChanged: (value) {
                     setState(() {
-                      gender = value;
+                      selectedGender = value;
+                      _gendercontroller.text = value ??
+                          ''; // Update the controller with selected gender
                     });
                   },
                 ),

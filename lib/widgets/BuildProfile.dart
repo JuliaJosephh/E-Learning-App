@@ -46,7 +46,7 @@ Widget buildprofile(BuildContext context) {
           await FirebaseAuth.instance.signOut();
 
           // Navigate to Login page (logout)
-          Navigator.pushReplacement(
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const Login()),
           );

@@ -17,7 +17,7 @@ class _HomeScreenState extends State<DefaultScreen> {
   final List<Widget> pages = [
     const HomePage(), 
     const ChatPage(),
-    const ProfilePage(), 
+    const ProfilePage(userId: '123',), 
   ];
 
   @override
@@ -25,6 +25,7 @@ class _HomeScreenState extends State<DefaultScreen> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
+          backgroundColor: Theme.of(context).colorScheme.surface,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: selected_index,
             selectedItemColor: backgroundColor,

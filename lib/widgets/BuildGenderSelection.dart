@@ -5,7 +5,11 @@ class GenderSelection extends StatelessWidget {
   final String? gender;
   final ValueChanged<String?> onChanged;
 
-  const GenderSelection({super.key, required this.gender, required this.onChanged});
+  const GenderSelection({
+    Key? key,
+    required this.gender,
+    required this.onChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,22 +17,24 @@ class GenderSelection extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
-          Radio(
+          Radio<String>(
             value: "Male",
             groupValue: gender,
             onChanged: onChanged,
           ),
-          Text("Male",
-              style:
-                  poppins.copyWith(fontSize: 14, fontWeight: FontWeight.bold)),
-          Radio(
+          Text(
+            "Male",
+            style: poppins.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
+          Radio<String>(
             value: "Female",
             groupValue: gender,
             onChanged: onChanged,
           ),
-          Text("Female",
-              style:
-                  poppins.copyWith(fontSize: 14, fontWeight: FontWeight.bold)),
+          Text(
+            "Female",
+            style: poppins.copyWith(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

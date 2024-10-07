@@ -2,6 +2,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/constants/themeprovider.dart';
 import 'package:sessiontask/firebase_options.dart';
 import 'package:sessiontask/screens/SplashScreenPage.dart';
 
@@ -10,7 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context)=>ThemeProvider(),
+  child: const MyApp(),
+  ));
 
   // Const // Improve performance 
   // Mounted
@@ -39,9 +44,11 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const SplashScreen(),
+      theme:Provider.of<ThemeProvider>(context).themeData,
+     
     );
   }
 }
