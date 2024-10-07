@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/SignUpPage.dart';
 import 'package:sessiontask/screens/forgetpassword.dart';
-
 import '../constants/constants.dart';
 import '../widgets/platforms.dart';
 
