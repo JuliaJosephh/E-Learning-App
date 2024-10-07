@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/widgets/AppBars/HomeAppBar.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
 
 class HomePage extends StatefulWidget {
