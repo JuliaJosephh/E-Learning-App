@@ -55,16 +55,6 @@ class _PasswordFieldState extends State<PasswordField> {
                       poppins.copyWith(color: Colors.black38, fontSize: 12),
                   contentPadding: const EdgeInsets.only(top: 15),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '${widget.label} is required';
-                  }
-                  if (widget.controller == widget.controller &&
-                      value != widget.controller.text) {
-                    return 'Passwords do not match';
-                  }
-                  return null;
-                },
               ),
             ),
           ),
