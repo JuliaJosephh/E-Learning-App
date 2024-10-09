@@ -40,166 +40,177 @@ class _SignupState extends State<Signup> {
       TextEditingController();
   final TextEditingController _phonecontroller = TextEditingController();
   final TextEditingController _gendercontroller = TextEditingController();
+Future<void> _signUp() async {
+  void _showErrorDialog(String errorMessage) {
+    AwesomeDialog(
+      context: context,
+      dialogType: DialogType.error,
+      animType: AnimType.rightSlide,
+      title: 'Error',
+      desc: errorMessage,
+    ).show();
+  }
 
-  Future<void> _signUp() async {
-    void _showErrorDialog(String errorMessage) {
-      AwesomeDialog(
-        context: context,
-        dialogType: DialogType.error,
-        animType: AnimType.rightSlide,
-        title: 'Error',
-        desc: errorMessage,
-      ).show();
-    }
+  setState(() {
+    // Clear previous error messages
+    _fullNameError = null;
+    _usernameError = null;
+    _phoneError = null;
+    _emailError = null;
+    _passwordError = null;
+    _confirmPasswordError = null;
+    _genderError = null;
+  });
 
+  // Validate all fields
+  if (_fullNameController.text.isEmpty) {
     setState(() {
-      // Clear previous error messages
-      _fullNameError = null;
-      _usernameError = null;
-      _phoneError = null;
-      _emailError = null;
-      _passwordError = null;
-      _confirmPasswordError = null;
-      _genderError = null;
+      _fullNameError = 'Please enter your full name.';
     });
+    return;
+  }
 
-    // Validate fields
-    if (_fullNameController.text.isEmpty) {
-      setState(() {
-        _fullNameError = 'Please enter your full name.';
-      });
-      return;
-    }
+  if (_usernameController.text.isEmpty) {
+    setState(() {
+      _usernameError = 'Please enter a username.';
+    });
+    return;
+  }
 
-    if (_usernameController.text.isEmpty) {
-      setState(() {
-        _usernameError = 'Please enter a username.';
-      });
-      return;
-    }
+  String phone = _phonecontroller.text;
+  if (phone.isEmpty) {
+    setState(() {
+      _phoneError = 'Please enter your phone number.';
+    });
+    return;
+  } else if (!RegExp(r'^01\d{9}$').hasMatch(phone)) {
+    setState(() {
+      _phoneError = 'Phone number must start with 01 and be exactly 11 digits.';
+    });
+    return;
+  }
 
-    String phone = _phonecontroller.text;
-    if (phone.isEmpty) {
-      setState(() {
-        _phoneError = 'Please enter your phone number.';
-      });
-      return;
-    } else if (!RegExp(r'^01\d{9}$').hasMatch(phone)) {
-      setState(() {
-        _phoneError = 'Phone number must start with 01 and be exactly 11 digits.';
-      });
-      return;
-    }
+  String email = _emailController.text;
+  if (email.isEmpty) {
+    setState(() {
+      _emailError = 'Please enter your email.';
+    });
+    return;
+  } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
+    setState(() {
+      _emailError = 'Please enter a valid email address.';
+    });
+    return;
+  }
 
-    String email = _emailController.text;
-    if (email.isEmpty) {
-      setState(() {
-        _emailError = 'Please enter your email.';
-      });
-      return;
-    } else if (!RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(email)) {
-      setState(() {
-        _emailError = 'Please enter a valid email address.';
-      });
-      return;
-    }
+  String password = _passwordController.text;
+  if (password.isEmpty) {
+    setState(() {
+      _passwordError = 'Please enter your password.';
+    });
+    return;
+  } else if (password.length < 6) {
+    setState(() {
+      _passwordError = 'Password must be at least 6 characters.';
+    });
+    return;
+  }
 
-    String password = _passwordController.text;
-    if (password.isEmpty) {
-      setState(() {
-        _passwordError = 'Please enter your password.';
-      });
-      return;
-    } else if (password.length < 6) {
-      setState(() {
-        _passwordError = 'Password must be at least 6 characters.';
-      });
-      return;
-    }
- if (_confirmPasswordController.text.isEmpty) {
+  if (_confirmPasswordController.text.isEmpty) {
     setState(() {
       _confirmPasswordError = 'Please confirm your password.';
     });
     return;
   } else if (_passwordController.text != _confirmPasswordController.text) {
-    // Show error dialog instead of setting the error message
     _showErrorDialog('Passwords do not match. Please try again.');
     return;
   }
 
-    // Validate gender selection
-    if (selectedGender == null || selectedGender!.isEmpty) {
-      setState(() {
-        _genderError = 'Please select a gender.';
-      });
-      return;
-    }
+  // Validate gender selection
+  if (selectedGender == null || selectedGender!.isEmpty) {
+    setState(() {
+      _genderError = 'Please select a gender.';
+    });
+    return;
+  }
 
-    // Check if terms and conditions checkbox is checked
-    if (!checked) {
-      _showErrorDialog('You must accept the terms and conditions.');
-      return;
-    }
+  // Check if terms and conditions checkbox is checked
+  if (!checked) {
+    _showErrorDialog('You must accept the terms and conditions.');
+    return;
+  }
 
+  // All validations passed, proceed with user creation
+  try {
+    // Create user with FirebaseAuth
+    final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+
+    // Send email verification
+    await credential.user!.sendEmailVerification();
+
+    // Show "waiting for email verification" dialog
+    final dialog = AwesomeDialog(
+      context: context,
+      dialogType: DialogType.info,
+      animType: AnimType.rightSlide,
+      title: 'Email Verification',
+      desc: 'Waiting for email verification. Please check your inbox.',
+      dismissOnTouchOutside: false,
+      showCloseIcon: false,
+    )..show();
+
+    // Poll for email verification status
+    await _checkEmailVerified(credential.user!, dialog);
+
+    // Store user info in Firestore
+    CollectionReference collref = FirebaseFirestore.instance.collection("User_Info");
+    await collref.doc(credential.user!.uid).set({
+      "FullName": _fullNameController.text,
+      "username": _usernameController.text,
+      "email": _emailController.text,
+      "gender": _gendercontroller.text,
+      "mobileNumber": _phonecontroller.text,
+      "password": _passwordController.text,
+      "createdAt": DateTime.now(),
+    });
+
+    // Navigate to the default screen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const DefaultScreen()),
+    );
+  } on FirebaseAuthException catch (e) {
     String errorMessage = 'An unknown error occurred.';
-    try {
-      // Check if the username already exists
-      final QuerySnapshot result = await FirebaseFirestore.instance
-          .collection('User_Info')
-          .where('username', isEqualTo: _usernameController.text)
-          .get();
+    if (e.code == 'weak-password') {
+      errorMessage = 'The password provided is too weak.';
+    } else if (e.code == 'email-already-in-use') {
+      errorMessage = 'The account already exists for that email.';
+    }
+    _showErrorDialog(errorMessage);
+  } catch (e) {
+    print(e);
+    _showErrorDialog('An error occurred: $e');
+  }
+}
 
-      final List<DocumentSnapshot> documents = result.docs;
+Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
+  while (!user.emailVerified) {
+    await Future.delayed(const Duration(seconds: 3));
+    await user.reload();
+    user = FirebaseAuth.instance.currentUser!; // Reload the current user
 
-      if (documents.isNotEmpty) {
-        // If there is a document with the same username, show an error message
-        _showErrorDialog('The username is already taken. Please choose another.');
-        return;
-      }
-
-      // Sign up with FirebaseAuth
-      final credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text,
-        password: _passwordController.text,
-      );
-
-      // If sign-up is successful, get the user ID (uid)
-      String uid = credential.user!.uid;
-
-      // Store user information in Firestore using the uid as the document ID
-      CollectionReference collref = FirebaseFirestore.instance.collection("User_Info");
-      await collref.doc(uid).set({
-        "FullName": _fullNameController.text,
-        "username": _usernameController.text,
-        "email": _emailController.text,
-        "gender": _gendercontroller.text,
-        "mobileNumber": _phonecontroller.text,
-        "password": _passwordController.text, // Consider hashing passwords for security
-        "createdAt": DateTime.now(),
-      });
-
-      // Navigate to DefaultScreen on successful sign-up
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DefaultScreen(),
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      // FirebaseAuth-specific error handling
-      if (e.code == 'weak-password') {
-        errorMessage = 'The password provided is too weak.';
-      } else if (e.code == 'email-already-in-use') {
-        errorMessage = 'The account already exists for that email.';
-      }
-      _showErrorDialog(errorMessage);
-    } catch (e) {
-      // General error handling
-      print(e);
-      errorMessage = 'An error occurred: $e';
-      _showErrorDialog(errorMessage);
+    // Check if the user is verified
+    if (user.emailVerified) {
+      dialog.dismiss(); // Dismiss the dialog when verified
+      break; // Exit the loop
     }
   }
+}
+
+
 
   @override
   Widget build(BuildContext context) {

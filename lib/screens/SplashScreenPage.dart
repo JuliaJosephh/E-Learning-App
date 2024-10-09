@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 SizedBox(height: 50,),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 100.0),
-                  child: const LinearProgressIndicator(color: Colors.blue),
+                  child: const LinearProgressIndicator(color: Colors.blue,backgroundColor: Colors.white,),
                 ),
               ],
             ),
