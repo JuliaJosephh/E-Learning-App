@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/BuildButtonLocked.dart';
 
-class CourseDetailsPage extends StatelessWidget {
+class CourseDetailsPage extends StatefulWidget {
   final String courseTitle;
   final List<Map<String, dynamic>> chapters;
 
@@ -13,13 +13,14 @@ class CourseDetailsPage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    // Get the height of the screen minus the app bar height
-    final double availableHeight = MediaQuery.of(context).size.height -
-        AppBar().preferredSize.height -
-        MediaQuery.of(context).padding.top;
+  State<CourseDetailsPage> createState() => _CourseDetailsPageState();
+}
 
+class _CourseDetailsPageState extends State<CourseDetailsPage> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: backgroundColor,
         leading: IconButton(
@@ -29,11 +30,11 @@ class CourseDetailsPage extends StatelessWidget {
           },
         ),
         title: Text(
-          courseTitle,
+          widget.courseTitle,
           style: poppins.copyWith(color: Colors.white, fontSize: 16),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -55,46 +56,19 @@ class CourseDetailsPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 25),
-                  Expanded(
-                    child: Container(
-                      height: availableHeight,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(25),
+                  for (var chapter in widget.chapters)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: LockedButton(
+                          pointNum: chapter['index'],
+                          pointDes: chapter['title'],
+                          locked: chapter['isLocked'],
+                          page: chapter['Page'],
+                        ),
                       ),
-                      child: chapters.length > 6
-                          ? ListView.builder(
-                              itemCount: chapters.length,
-                              itemBuilder: (context, index) {
-                                final chapter = chapters[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: buildLockedButton(
-                                    context,
-                                    chapter['index'],
-                                    chapter['title'],
-                                    chapter['isLocked'],
-                                    chapter['Page'],
-                                  ),
-                                );
-                              },
-                            )
-                          : Column(
-                              children: chapters.map((chapter) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: buildLockedButton(
-                                    context,
-                                    chapter['index'],
-                                    chapter['title'],
-                                    chapter['isLocked'],
-                                    chapter['Page'],
-                                  ),
-                                );
-                              }).toList(),
-                            ),
                     ),
-                  ),
                 ],
               ),
             ),

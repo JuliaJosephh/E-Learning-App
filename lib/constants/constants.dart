@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, constant_identifier_names, unnecessary_const
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,22 +15,15 @@ Color? LockedChapterColor = Colors.grey[400];
 final TextStyle poppins = GoogleFonts.poppins();
 
 ThemeData lightmode = ThemeData(
-  brightness: Brightness.light,
-  colorScheme: ColorScheme.light(
-    surface: Colors.white,//backgroundcolor
-    primary: Color.fromARGB(255, 11, 93, 235),//button color
-    secondary: Colors.black //text color
-  
-  )
-);
+    brightness: Brightness.light,
+    colorScheme: const ColorScheme.light(
+        surface: Colors.white,
+        primary: Color.fromARGB(255, 11, 93, 235),
+        secondary: Colors.black));
 
 ThemeData darkmode = ThemeData(
-  brightness: Brightness.dark,
-  colorScheme: ColorScheme.dark(
-    surface: Colors.grey.shade900,
-       primary: Colors.white,
-        secondary: Colors.white
-
-       
-  )
-);
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+        surface: Colors.grey.shade900,
+        primary: Colors.white,
+        secondary: Colors.white));

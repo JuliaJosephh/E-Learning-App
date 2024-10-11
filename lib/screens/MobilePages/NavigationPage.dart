@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/NavigationContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/FlutterQuizzes/NavigationQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class NavigationPage extends StatelessWidget {
+class NavigationPage extends StatefulWidget {
   const NavigationPage({super.key});
 
   @override
+  State<NavigationPage> createState() => _NavigationPageState();
+}
+
+class _NavigationPageState extends State<NavigationPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Navigation',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the Navigation page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: navigationContent, 
+      questions: navigationQuestions, 
+      title: 'Navigation', 
+      currentPage: const NavigationPage(),
+      trackChosen: mobileDevChapters, 
+      language: 'Dart',
     );
   }
 }

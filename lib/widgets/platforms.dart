@@ -16,17 +16,16 @@ class signUpPlatform extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(width: 1, color:Theme.of(context).colorScheme.secondary)),
+                border: Border.all(
+                    width: 1, color: Theme.of(context).colorScheme.secondary)),
             child: IconButton(
               onPressed: () async {
                 await launchURL("https://appleid.apple.com/");
               },
-              icon: Image.asset(
-                "images/apple-logo.png",
-                height: 30,
-                width: 30,
-                 color:Theme.of(context).colorScheme.secondary
-              ),
+              icon: Image.asset("images/apple-logo.png",
+                  height: 30,
+                  width: 30,
+                  color: Theme.of(context).colorScheme.secondary),
             ),
           ),
         ),
@@ -35,7 +34,8 @@ class signUpPlatform extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(width: 1,  color:Theme.of(context).colorScheme.secondary)),
+                border: Border.all(
+                    width: 1, color: Theme.of(context).colorScheme.secondary)),
             child: IconButton(
               onPressed: () async {
                 await launchURL("https://accounts.google.com/login");
@@ -53,7 +53,8 @@ class signUpPlatform extends StatelessWidget {
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(100),
-                border: Border.all(width: 1, color:Theme.of(context).colorScheme.secondary)),
+                border: Border.all(
+                    width: 1, color: Theme.of(context).colorScheme.secondary)),
             child: IconButton(
               onPressed: () async {
                 await launchURL("https://www.facebook.com/");

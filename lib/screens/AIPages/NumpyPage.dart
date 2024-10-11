@@ -1,28 +1,26 @@
-
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/AIContent/NumPyContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/AIQuizzes/NumPyQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class NumPyPage extends StatelessWidget {
+class NumPyPage extends StatefulWidget {
   const NumPyPage({super.key});
 
   @override
+  State<NumPyPage> createState() => _NumPyPageState();
+}
+
+class _NumPyPageState extends State<NumPyPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('NumPy',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the NumPy page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: NumPyContent,
+      questions: NumPyQuestions,
+      title: 'NumPy',
+      currentPage: const NumPyPage(),
+      trackChosen: aiChapters,
+      language: 'Python',
     );
   }
 }

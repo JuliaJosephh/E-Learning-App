@@ -168,7 +168,7 @@ class _LoginState extends State<Login> {
                           padding: const EdgeInsets.only(top: 8.0, left: 8),
                           child: Text(
                             _emailErrorMessage ?? '',
-                            style: TextStyle(color: Colors.red, fontSize: 12),
+                            style: const TextStyle(color: Colors.red, fontSize: 12),
                           ),
                         ),
                     ],
@@ -236,7 +236,7 @@ class _LoginState extends State<Login> {
                         padding: const EdgeInsets.only(top: 8.0, left: 30.0),
                         child: Text(
                           _passwordErrorMessage ?? '',
-                          style: TextStyle(color: Colors.red, fontSize: 12),
+                          style: const TextStyle(color: Colors.red, fontSize: 12),
                         ),
                       ),
                   ],
@@ -328,13 +328,13 @@ class _LoginState extends State<Login> {
                   ),
                 ),
                  Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
                   child: Row(
                     children: [
                       Expanded(
                           flex: 1,
                           child: Divider(height: 1, color:Theme.of(context).colorScheme.secondary)),
-                      Expanded(
+                      const Expanded(
                         flex: 2,
                         child: Text(
                           "Or Sign in with",

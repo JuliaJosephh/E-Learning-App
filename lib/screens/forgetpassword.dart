@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
 import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/screens/VerifyWithNumber.dart';
 import 'package:sessiontask/screens/emailcode.dart';
-import 'package:sessiontask/screens/verifywnum.dart';
 
 class Forgetpassword extends StatefulWidget {
   const Forgetpassword({super.key});
@@ -15,7 +15,8 @@ class _ForgetpasswordState extends State<Forgetpassword> {
   final TextEditingController _emailController = TextEditingController();
 
   Future<void> _checkEmailAndSendCode(BuildContext context) async {
-    String email = _emailController.text.trim();
+String email = _emailController.text.trim().toLowerCase();
+    
 
     if (email.isEmpty) {
       // Show error if the email field is empty
@@ -27,7 +28,9 @@ class _ForgetpasswordState extends State<Forgetpassword> {
 
     try {
       // Check if the email exists in Firebase
-      final signInMethods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+    final signInMethods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+print('Sign-in methods for email: $signInMethods');
+
       if (signInMethods.isEmpty) {
         // If no sign-in methods are returned, the email does not exist
         ScaffoldMessenger.of(context).showSnackBar(
@@ -97,7 +100,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
                     Expanded(
                       child: TextField(
                         controller: _emailController, // Set the controller
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Email",
                           border: InputBorder.none,
                         ),
@@ -111,7 +114,7 @@ class _ForgetpasswordState extends State<Forgetpassword> {
             ElevatedButton(
               onPressed: () => _checkEmailAndSendCode(context), // Call the method
               style: const ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(backgroundColor),
+                backgroundColor: WidgetStatePropertyAll(backgroundColor),
               ),
               child: const Padding(
                 padding: EdgeInsets.all(15.0),
@@ -135,14 +138,14 @@ class _ForgetpasswordState extends State<Forgetpassword> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 100),
               child: InkWell(
-                overlayColor: MaterialStateProperty.all(Colors.transparent),
+                overlayColor: WidgetStateProperty.all(Colors.transparent),
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Verifywnum()),
                   );
                 },
-                child: Text(
+                child: const Text(
                   "Verify Using Number",
                   textAlign: TextAlign.center,
                   style: TextStyle(

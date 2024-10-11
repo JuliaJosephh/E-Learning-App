@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/IntrotoFlutterContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/FlutterQuizzes/FlutterIntroQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class IntroToFlutterPage extends StatelessWidget {
+class IntroToFlutterPage extends StatefulWidget {
   const IntroToFlutterPage({super.key});
 
   @override
+  State<IntroToFlutterPage> createState() => _IntroToFlutterPageState();
+}
+
+class _IntroToFlutterPageState extends State<IntroToFlutterPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Intro to Flutter',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the Intro to Flutter page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: flutterContent, 
+      questions: FlutterQuestions, 
+      title: 'Introduction to Flutter', 
+      currentPage: const IntroToFlutterPage(),
+      trackChosen: mobileDevChapters, language: 'Dart',
+      
     );
   }
 }

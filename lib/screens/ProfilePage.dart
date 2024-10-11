@@ -1,15 +1,15 @@
 import 'dart:convert';
 import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/constants/themeprovider.dart';
+import 'package:sessiontask/constants/ThemeProvider.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -37,12 +37,15 @@ class _ProfilePageState extends State<ProfilePage> {
       String? profileImage = userData['profileImageUrl'] as String?;
       String? fullName = userData['FullName'] as String?;
 
-      // Check and set profile image
-      if (profileImage != null) {
-        setState(() {
-          _image = base64Decode(profileImage); // Decode Base64 to Uint8List
-          _imageExists = true; // Set flag to indicate the image exists
-        });
+      if (profileImage != null && profileImage.isNotEmpty) {
+        try {
+          setState(() {
+            _image = base64Decode(profileImage);
+            _imageExists = true;
+          });
+        } catch (e) {
+          print('Error decoding profile image: $e');
+        }
       }
 
       // Check and set Full Name
@@ -163,7 +166,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottom: -10,
                                   right: -5,
                                   child: IconButton(
-                                    onPressed: selectImage, // Change photo button
+                                    onPressed:
+                                        selectImage, // Change photo button
                                     icon: const Icon(
                                       Icons.edit,
                                       color: Colors.white,
@@ -185,7 +189,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   bottom: -10,
                                   right: -5,
                                   child: IconButton(
-                                    onPressed: selectImage, // Call selectImage on press
+                                    onPressed:
+                                        selectImage, // Call selectImage on press
                                     icon: const Icon(
                                       Icons.add_a_photo,
                                       color: Colors.white,

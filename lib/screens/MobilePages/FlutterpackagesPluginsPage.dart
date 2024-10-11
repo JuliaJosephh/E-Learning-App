@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/PackagesPluginsContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/FlutterQuizzes/PackagesPluginsQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class FlutterpackagesPluginsPage extends StatelessWidget {
+class FlutterpackagesPluginsPage extends StatefulWidget {
   const FlutterpackagesPluginsPage({super.key});
 
   @override
+  State<FlutterpackagesPluginsPage> createState() =>
+      _FlutterpackagesPluginsPageState();
+}
+
+class _FlutterpackagesPluginsPageState
+    extends State<FlutterpackagesPluginsPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Flutter Packages & Plugins',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the Flutter Packages & Plugins page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: packagesAndPluginsContent,
+      questions: packagesAndPluginsQuestions,
+      title: 'Packages and Plugins',
+      currentPage: const FlutterpackagesPluginsPage(),
+      trackChosen: mobileDevChapters,
+      language: 'Dart',
     );
   }
 }

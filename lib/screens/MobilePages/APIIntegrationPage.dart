@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/APIIntegrationContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/FlutterQuizzes/APIIntegrationQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class APIIntegrationPage extends StatelessWidget {
+class APIIntegrationPage extends StatefulWidget {
   const APIIntegrationPage({super.key});
 
   @override
+  State<APIIntegrationPage> createState() => _APIIntegrationPageState();
+}
+
+class _APIIntegrationPageState extends State<APIIntegrationPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('API Integration ',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the API Integration page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: apiIntegrationContent, 
+      questions: apiIntegrationQuestions,
+      title: 'API Integration', 
+      currentPage: const APIIntegrationPage(), 
+      trackChosen: mobileDevChapters,
+       language: 'Dart', 
     );
   }
 }

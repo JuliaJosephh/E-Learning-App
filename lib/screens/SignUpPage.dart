@@ -41,7 +41,7 @@ class _SignupState extends State<Signup> {
   final TextEditingController _phonecontroller = TextEditingController();
   final TextEditingController _gendercontroller = TextEditingController();
 Future<void> _signUp() async {
-  void _showErrorDialog(String errorMessage) {
+  void showErrorDialog(String errorMessage) {
     AwesomeDialog(
       context: context,
       dialogType: DialogType.error,
@@ -122,7 +122,7 @@ Future<void> _signUp() async {
     });
     return;
   } else if (_passwordController.text != _confirmPasswordController.text) {
-    _showErrorDialog('Passwords do not match. Please try again.');
+    showErrorDialog('Passwords do not match. Please try again.');
     return;
   }
 
@@ -136,7 +136,7 @@ Future<void> _signUp() async {
 
   // Check if terms and conditions checkbox is checked
   if (!checked) {
-    _showErrorDialog('You must accept the terms and conditions.');
+    showErrorDialog('You must accept the terms and conditions.');
     return;
   }
 
@@ -189,10 +189,10 @@ Future<void> _signUp() async {
     } else if (e.code == 'email-already-in-use') {
       errorMessage = 'The account already exists for that email.';
     }
-    _showErrorDialog(errorMessage);
+    showErrorDialog(errorMessage);
   } catch (e) {
     print(e);
-    _showErrorDialog('An error occurred: $e');
+    showErrorDialog('An error occurred: $e');
   }
 }
 
@@ -261,7 +261,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _fullNameError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -276,7 +276,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _usernameError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -291,7 +291,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: Text(
                       _phoneError!,maxLines: 2,
-                      style: TextStyle(color: Colors.red,fontSize: 12,),
+                      style: const TextStyle(color: Colors.red,fontSize: 12,),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -307,7 +307,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _emailError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -321,7 +321,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _passwordError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -335,7 +335,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _confirmPasswordError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -354,7 +354,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                     padding: const EdgeInsets.only(left: 40.0),
                     child: Text(
                       _genderError!,
-                      style: TextStyle(color: Colors.red,fontSize: 12),
+                      style: const TextStyle(color: Colors.red,fontSize: 12),
                     ),
                   ),
                 const SizedBox(height: 20),
@@ -374,7 +374,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                   child: TextButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(backgroundColor),
+                          WidgetStateProperty.all(backgroundColor),
                     ),
                     onPressed: _signUp,
                     child: Padding(
@@ -389,7 +389,7 @@ Future<void> _checkEmailVerified(User user, AwesomeDialog dialog) async {
                 ),
                 // Platform buttons for sign up
                 const SizedBox(height: 20),
-                signUpPlatform(),
+                const signUpPlatform(),
                 const SizedBox(height: 20),
                 // Text for navigation to Login page
                 Padding(

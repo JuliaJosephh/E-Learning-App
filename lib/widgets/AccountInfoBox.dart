@@ -13,7 +13,8 @@ Future<Map<String, String>> fetchUserInfo() async {
   }
 
   // Fetch the user document from Firestore
-  DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection("User_Info").doc(uid).get();
+  DocumentSnapshot userDoc =
+      await FirebaseFirestore.instance.collection("User_Info").doc(uid).get();
 
   if (userDoc.exists) {
     // Extract user info
@@ -46,13 +47,16 @@ Widget AccountInfoBox() {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildAccountInfoRow(Icons.person, 'Full Name:', userInfo['fullName']!),
+              buildAccountInfoRow(
+                  Icons.person, 'Full Name:', userInfo['fullName']!),
               const SizedBox(height: 10),
-              buildAccountInfoRow(Icons.account_circle, 'Username:', userInfo['username']!), // Changed to username
+              buildAccountInfoRow(Icons.account_circle, 'Username:',
+                  userInfo['username']!), // Changed to username
               const SizedBox(height: 10),
               buildAccountInfoRow(Icons.email, 'Email:', userInfo['email']!),
               const SizedBox(height: 10),
-              buildAccountInfoRow(Icons.phone, 'Mobile Number:', userInfo['mobileNumber']!),
+              buildAccountInfoRow(
+                  Icons.phone, 'Mobile Number:', userInfo['mobileNumber']!),
             ],
           );
         }

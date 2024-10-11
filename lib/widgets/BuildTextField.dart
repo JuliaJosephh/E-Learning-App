@@ -4,16 +4,13 @@ import 'package:sessiontask/constants/constants.dart';
 class CustomTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
-
   final String hint;
   final bool isEmail;
 
- CustomTextField({
-    super.key,
+  const CustomTextField({super.key, 
     required this.label,
     required this.controller,
     required this.hint,
- 
     this.isEmail = false,
   });
 
@@ -45,7 +42,16 @@ class CustomTextField extends StatelessWidget {
                   hintStyle:
                       poppins.copyWith(color: Colors.black38, fontSize: 12),
                 ),
-              
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '$label is required';
+                  }
+                  if (isEmail &&
+                      !RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
               ),
             ),
           ),

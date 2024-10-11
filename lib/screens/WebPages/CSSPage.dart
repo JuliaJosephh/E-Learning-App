@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/webContent/CSSContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/WebQuizzes/CSSQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class CSSPage extends StatelessWidget {
+class CSSPage extends StatefulWidget {
   const CSSPage({super.key});
 
   @override
+  State<CSSPage> createState() => _CSSPageState();
+}
+
+class _CSSPageState extends State<CSSPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('CSS',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the CSS page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: CSSContent,
+      questions: CSSQuestions,
+      title: 'CSS',
+      currentPage: const CSSPage(),
+      trackChosen: webDevChapters,
+      language: 'CSS',
     );
   }
 }

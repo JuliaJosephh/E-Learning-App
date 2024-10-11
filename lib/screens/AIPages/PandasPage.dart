@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/AIContent/PandasContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/AIQuizzes/PandasQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class PandasPage extends StatelessWidget {
+class PandasPage extends StatefulWidget {
   const PandasPage({super.key});
 
   @override
+  State<PandasPage> createState() => _PandasPageState();
+}
+
+class _PandasPageState extends State<PandasPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Pandas',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the Pandas page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: pandasContent, 
+      questions: pandasQuestions, 
+      title: 'Pandas',
+      currentPage: const PandasPage(), 
+      trackChosen: aiChapters, 
+      language: 'Python',
     );
   }
 }

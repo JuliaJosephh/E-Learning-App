@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/FlutterContent/DartProgrammingContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/FlutterQuizzes/DartQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class DartProgrammingPage extends StatelessWidget {
+class DartProgrammingPage extends StatefulWidget {
   const DartProgrammingPage({super.key});
 
   @override
+  State<DartProgrammingPage> createState() => _DartProgrammingPageState();
+}
+
+class _DartProgrammingPageState extends State<DartProgrammingPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Dart Programming',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the dart Programming page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: dartContent, 
+      questions: DartQuestions, 
+      title: 'Dart', 
+      currentPage: const DartProgrammingPage(), 
+      trackChosen: mobileDevChapters, 
+      language: 'Dart',
     );
   }
 }

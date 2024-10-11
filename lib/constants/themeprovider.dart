@@ -6,7 +6,8 @@ class ThemeProvider with ChangeNotifier {
 
   ThemeData get themeData => _themeData;
 
-  set themeData(ThemeData themeData) {  // Corrected setter syntax
+  set themeData(ThemeData themeData) {
+    // Corrected setter syntax
     _themeData = themeData;
     notifyListeners();
   }

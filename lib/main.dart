@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sessiontask/constants/themeprovider.dart';
+import 'package:sessiontask/constants/ThemeProvider.dart';
 import 'package:sessiontask/firebase_options.dart';
-import 'package:sessiontask/screens/SplashScreenPage.dart';
+import 'package:sessiontask/screens/DefaultScreen.dart';
+import 'package:sessiontask/screens/LoginPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +15,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -44,7 +45,9 @@ class _MyAppState extends State<MyApp> {
     return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const SplashScreen(),
+        home: FirebaseAuth.instance.currentUser == null
+            ? const Login()
+            : const DefaultScreen(),
         theme: themeProvider.themeData, // Use themeProvider directly
       );
     });

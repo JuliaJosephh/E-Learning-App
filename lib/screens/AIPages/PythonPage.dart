@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:sessiontask/constants/constants.dart';
+import 'package:sessiontask/Content/AIContent/PythonbasicsContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
+import 'package:sessiontask/quizzes/AIQuizzes/PythonBasicsQuestions.dart';
+import 'package:sessiontask/screens/ContentPage.dart';
 
-class PythonPage extends StatelessWidget {
+class PythonPage extends StatefulWidget {
   const PythonPage({super.key});
 
   @override
+  State<PythonPage> createState() => _PythonPageState();
+}
+
+class _PythonPageState extends State<PythonPage> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Text('Python',
-            style: poppins.copyWith(fontSize: 14, color: Colors.white)),
-        backgroundColor: backgroundColor,
-      ),
-      body: Center(
-        child: Text('Welcome to the Python page!',
-            style: poppins.copyWith(fontSize: 14)),
-      ),
+    return ContentPage(
+      content: pythonBasicsContent, 
+      questions: PythonQuestions,
+      title: 'Python',
+      currentPage: const PythonPage(),
+       trackChosen: aiChapters, 
+       language: 'Python', 
     );
   }
 }

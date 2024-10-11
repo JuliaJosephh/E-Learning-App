@@ -25,7 +25,6 @@ class _HomeScreenState extends State<DefaultScreen> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.surface,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: selected_index,
             selectedItemColor: backgroundColor,
