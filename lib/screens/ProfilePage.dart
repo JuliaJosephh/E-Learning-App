@@ -5,7 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,14 +19,15 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   Uint8List? _image;
   bool _imageExists = false;
-  String _fullName = 'Loading...'; // Initialize with a loading text
+  String _fullName = 'Loading...';
+  int _points = 0; // Initialize points with a default value of 0
 
   Future<void> checkUserProfile() async {
     String? uid = FirebaseAuth.instance.currentUser?.uid;
 
     if (uid == null) return; // User is not logged in
 
-    // Fetch the user document from Firestore to check for an existing profile image
+    // Fetch the user document from Firestore to check for an existing profile image and points
     DocumentSnapshot userDoc =
         await FirebaseFirestore.instance.collection("User_Info").doc(uid).get();
 
@@ -35,6 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
       var userData = userDoc.data() as Map<String, dynamic>;
       String? profileImage = userData['profileImageUrl'] as String?;
       String? fullName = userData['FullName'] as String?;
+      int? points = userData['points'] as int?; // Get the points if available
 
       if (profileImage != null && profileImage.isNotEmpty) {
         try {
@@ -51,6 +52,13 @@ class _ProfilePageState extends State<ProfilePage> {
       if (fullName != null) {
         setState(() {
           _fullName = fullName; // Update the Full Name state variable
+        });
+      }
+
+      // Check and set Points
+      if (points != null) {
+        setState(() {
+          _points = points; // Update the Points state variable
         });
       }
     }
@@ -133,8 +141,27 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                
+                Container(
+                  width: 85,
+                  height: 60,
+                 decoration: BoxDecoration(color: const Color.fromARGB(255, 8, 62, 155),borderRadius: BorderRadius.circular(15),border: Border.all(color: Colors.grey,width: .5)),
+                  child: Row(
+                    children: [
+                      Image.asset("images/trophy.png", scale: 11),
+                      Text(
+                        "$_points", // Display the points fetched from Firestore
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only( top: 10.0),
+                        child: Text("pt",style: TextStyle(color: Colors.white,fontSize: 10),),
+                      )
+                    ],
+                  ),
+                ),
                 Center(
                   child: Column(
                     children: [

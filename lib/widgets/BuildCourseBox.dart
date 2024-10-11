@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/CourseDetailsPage.dart';
@@ -15,13 +17,46 @@ class BuildCourseBox extends StatefulWidget {
 }
 
 class _BuildCourseBoxState extends State<BuildCourseBox> {
+  bool isEnrolled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkEnrollmentStatus(); // Check the enrollment status when the widget initializes
+  }
+
+  Future<void> checkEnrollmentStatus() async {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    try {
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection("User_Info")
+          .doc(uid)
+          .get();
+
+      if (userDoc.exists) {
+        List<dynamic>? enrolledCourses =
+            userDoc.get('enrolled_courses') as List<dynamic>?;
+
+        if (enrolledCourses != null &&
+            enrolledCourses.contains(widget.course['title'])) {
+          setState(() {
+            isEnrolled = true; // Update the state to indicate the course is enrolled
+          });
+        }
+      }
+    } catch (e) {
+      print('Error checking enrollment status: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Extract course details
     String courseTitle = widget.course['title'];
     String imageUrl = widget.course['imageUrl'];
     List<Map<String, dynamic>> chapters = widget.course['chapters'];
-    bool enrollmentStatus = widget.course['enrollmentStatus'];
 
     return Container(
       padding: const EdgeInsets.all(15),
@@ -84,7 +119,7 @@ class _BuildCourseBoxState extends State<BuildCourseBox> {
           const SizedBox(height: 10),
           ElevatedButton(
             onPressed: () {
-              if (enrollmentStatus == true) {
+              if (isEnrolled) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -108,9 +143,11 @@ class _BuildCourseBoxState extends State<BuildCourseBox> {
                           child: const Text('No'),
                         ),
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            // Update enrollment status and Firestore
+                            await enrollInCourse(courseTitle);
                             setState(() {
-                              widget.course['enrollmentStatus'] = true;
+                              isEnrolled = true;
                             });
                             Navigator.of(context).pop();
                             Navigator.push(
@@ -134,9 +171,7 @@ class _BuildCourseBoxState extends State<BuildCourseBox> {
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
             ),
             child: Text(
-              widget.course['enrollmentStatus']
-                  ? "Dive Deeper into Course"
-                  : "Enroll Now",
+              isEnrolled ? "Dive Deeper into Course" : "Enroll Now",
               style: poppins.copyWith(
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
@@ -146,5 +181,21 @@ class _BuildCourseBoxState extends State<BuildCourseBox> {
         ],
       ),
     );
+  }
+
+  Future<void> enrollInCourse(String courseTitle) async {
+    String? uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    try {
+      DocumentReference userDoc =
+          FirebaseFirestore.instance.collection("User_Info").doc(uid);
+
+      await userDoc.set({
+        'enrolled_courses': FieldValue.arrayUnion([courseTitle])
+      }, SetOptions(merge: true));
+    } catch (e) {
+      print('Error enrolling in course: $e');
+    }
   }
 }

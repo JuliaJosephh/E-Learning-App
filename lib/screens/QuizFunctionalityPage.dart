@@ -1,14 +1,15 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 
 class RandomQuestionsPage extends StatefulWidget {
   final List<Map<String, dynamic>> questions;
   final dynamic CurrentPage;
-  final List<Map<String, dynamic>>
-      TrackChosen; // Updated to handle the course track
+  final List<Map<String, dynamic>> TrackChosen;
 
   const RandomQuestionsPage({
     required this.questions,
@@ -26,8 +27,7 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
   List<String?> selectedAnswers = [];
   List<bool> correctAnswers = [];
   bool isSubmitted = false;
-  bool isNextChapterUnlocked =
-      false; // Updated to track next chapter unlock status
+  bool isNextChapterUnlocked = false;
 
   @override
   void initState() {
@@ -79,11 +79,9 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          for (var option in selectedQuestions[index]
-                              ['options'])
+                          for (var option in selectedQuestions[index]['options'])
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 2.0),
+                              padding: const EdgeInsets.symmetric(vertical: 2.0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -95,8 +93,8 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
                                   if (!isSubmitted) {
                                     setState(() {
                                       selectedAnswers[index] = option;
-                                      correctAnswers[index] = option ==
-                                          selectedQuestions[index]['Answer'];
+                                      correctAnswers[index] =
+                                          option == selectedQuestions[index]['Answer'];
                                     });
                                   }
                                 },
@@ -146,13 +144,14 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
     );
   }
 
-  void showResults() {
+  void showResults() async {
     int score = 0;
     for (var isCorrect in correctAnswers) {
       if (isCorrect) {
         score++;
       }
     }
+
     if ((score / selectedQuestions.length) >= 0.8) {
       setState(() {
         isNextChapterUnlocked = true;
@@ -175,6 +174,9 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
         });
       }
 
+      // Update points in Firestore
+      await updatePoints();
+
       showDialog(
         context: context,
         barrierDismissible: false,
@@ -183,8 +185,7 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Lottie.asset('assets/animations/Celebration.json',
-                    repeat: true),
+                Lottie.asset('assets/animations/Celebration.json', repeat: true),
                 const SizedBox(height: 20),
                 const Text(
                   'Congratulations!',
@@ -223,7 +224,6 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
         },
       );
     } else {
-      // Display failure dialog
       showDialog(
         context: context,
         builder: (context) {
@@ -267,6 +267,35 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
           );
         },
       );
+    }
+  }
+
+  Future<void> updatePoints() async {
+    try {
+      final userId = FirebaseAuth.instance.currentUser?.uid;
+
+      if (userId == null) {
+        print("User is not authenticated.");
+        return;
+      }
+
+      final pointsToAdd = 10;
+
+      final userDoc = FirebaseFirestore.instance.collection('User_Info').doc(userId);
+
+      final docSnapshot = await userDoc.get();
+
+      if (docSnapshot.exists) {
+        await userDoc.update({
+          'points': FieldValue.increment(pointsToAdd),
+        });
+        print("Points updated successfully.");
+      } else {
+        await userDoc.set({'points': pointsToAdd}, SetOptions(merge: true));
+        print("Points field created successfully.");
+      }
+    } catch (error) {
+      print('Error updating points: $error');
     }
   }
 }
