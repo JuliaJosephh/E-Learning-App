@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // Import Firebase Auth
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/screens/VerifyWithNumber.dart';
-import 'package:sessiontask/screens/emailcode.dart';
-
+import 'package:awesome_dialog/awesome_dialog.dart'; // Import Awesome Dialog
+import 'package:sessiontask/screens/LoginPage.dart';
 class Forgetpassword extends StatefulWidget {
   const Forgetpassword({super.key});
 
@@ -14,12 +14,19 @@ class Forgetpassword extends StatefulWidget {
 class _ForgetpasswordState extends State<Forgetpassword> {
   final TextEditingController _emailController = TextEditingController();
 
-  Future<void> _checkEmailAndSendCode(BuildContext context) async {
-String email = _emailController.text.trim().toLowerCase();
-    
+  Future<bool> checkEmailExists(String email) async {
+    final QuerySnapshot result = await FirebaseFirestore.instance
+        .collection('User_Info') // Change this to your collection name
+        .where('email', isEqualTo: email)
+        .get();
+
+    return result.docs.isNotEmpty; // Returns true if any document exists
+  }
+
+  Future<void> _checkEmailAndSendReset(BuildContext context) async {
+    String email = _emailController.text.trim().toLowerCase();
 
     if (email.isEmpty) {
-      // Show error if the email field is empty
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter your email.')),
       );
@@ -27,29 +34,35 @@ String email = _emailController.text.trim().toLowerCase();
     }
 
     try {
-      // Check if the email exists in Firebase
-    final signInMethods = await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-print('Sign-in methods for email: $signInMethods');
+      // Check if the email exists in Firestore
+      bool exists = await checkEmailExists(email);
 
-      if (signInMethods.isEmpty) {
-        // If no sign-in methods are returned, the email does not exist
+      if (exists) {
+        // Email exists; send password reset email
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+        // Show dialog to inform the user
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.success,
+          animType: AnimType.scale,
+          title: 'Email Sent',
+          desc: 'A password reset link has been sent to your email.',
+          btnOkOnPress: () {
+            // Navigate to the login page when OK is pressed
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Login()), // Navigate to your Login page
+            );
+          },
+        ).show();
+      } else {
+        // If no documents were found, the email does not exist
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Email does not exist.')),
         );
-      } else {
-        // Email exists; navigate to the verification page
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Emailcode(), // Navigate to the email verification page
-          ),
-        );
-
-        // Optionally, send a password reset code (uncomment if needed)
-        // await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
       }
     } catch (e) {
-      // Handle any exceptions
       print("Error checking email: $e");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('An error occurred: $e')),
@@ -82,7 +95,6 @@ print('Sign-in methods for email: $signInMethods');
               maxLines: 2,
             ),
             const SizedBox(height: 40),
-            // Improved Row for Icon and TextField alignment
             Container(
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey, width: 1),
@@ -92,14 +104,11 @@ print('Sign-in methods for email: $signInMethods');
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    const Icon(
-                      Icons.email,
-                      color: Colors.black,
-                    ),
+                    const Icon(Icons.email, color: Colors.black),
                     const SizedBox(width: 10.0),
                     Expanded(
                       child: TextField(
-                        controller: _emailController, // Set the controller
+                        controller: _emailController,
                         decoration: const InputDecoration(
                           hintText: "Email",
                           border: InputBorder.none,
@@ -112,7 +121,7 @@ print('Sign-in methods for email: $signInMethods');
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () => _checkEmailAndSendCode(context), // Call the method
+              onPressed: () => _checkEmailAndSendReset(context),
               style: const ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(backgroundColor),
               ),
@@ -121,37 +130,6 @@ print('Sign-in methods for email: $signInMethods');
                 child: Text(
                   "Send code",
                   style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "OR",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
-              child: InkWell(
-                overlayColor: WidgetStateProperty.all(Colors.transparent),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Verifywnum()),
-                  );
-                },
-                child: const Text(
-                  "Verify Using Number",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: backgroundColor,
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
               ),
             ),
