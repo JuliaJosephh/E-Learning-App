@@ -2,8 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:awesome_dialog/awesome_dialog.dart'; // Import Awesome Dialog
-import 'package:sessiontask/screens/LoginPage.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:sessiontask/screens/LoginPage.dart'; // Import Awesome Dialog
+
+
 class Forgetpassword extends StatefulWidget {
   const Forgetpassword({super.key});
 
@@ -58,9 +60,14 @@ class _ForgetpasswordState extends State<Forgetpassword> {
         ).show();
       } else {
         // If no documents were found, the email does not exist
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Email does not exist.')),
-        );
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.scale,
+          title: 'Email Not Found',
+          desc: 'The email you entered does not exist in our records.',
+         
+        ).show();
       }
     } catch (e) {
       print("Error checking email: $e");
