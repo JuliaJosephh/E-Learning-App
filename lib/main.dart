@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sessiontask/constants/ThemeProvider.dart';
 import 'package:sessiontask/firebase_options.dart';
 import 'package:sessiontask/screens/DefaultScreen.dart';
 import 'package:sessiontask/screens/LoginPage.dart';
@@ -13,10 +12,9 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
+    
+       const MyApp(),
+    
   );
 }
 
@@ -42,14 +40,12 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
-      return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: FirebaseAuth.instance.currentUser == null
-            ? const Login()
-            : const DefaultScreen(),
-        theme: themeProvider.themeData, // Use themeProvider directly
-      );
-    });
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: FirebaseAuth.instance.currentUser == null
+          ? const Login()
+          : const DefaultScreen(),
+     // Use themeProvider directly
+    );
   }
 }

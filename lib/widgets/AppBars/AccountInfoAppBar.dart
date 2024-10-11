@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sessiontask/constants/constants.dart';
 
-Future<String> fetchUserFullName() async {
+Future<String> fetchUserImageUrl() async {
   // Get the current user's UID
   String? uid = FirebaseAuth.instance.currentUser?.uid;
 
@@ -15,9 +15,9 @@ Future<String> fetchUserFullName() async {
   DocumentSnapshot userDoc = await FirebaseFirestore.instance.collection("User_Info").doc(uid).get();
 
   if (userDoc.exists) {
-    // Extract and return the full name
+    // Extract and return the image URL
     var userData = userDoc.data() as Map<String, dynamic>;
-    return userData['FullName'] ?? 'Unknown';
+    return userData['ImageUrl'] ?? 'images/user.png'; // Provide a default image path if ImageUrl is not available
   } else {
     throw Exception("User data not found");
   }
@@ -53,40 +53,23 @@ PreferredSizeWidget BuildAccountInfoAppBar(BuildContext context) {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: FutureBuilder<String>(
-          future: fetchUserFullName(), // Call the fetch method here
+          future: fetchUserImageUrl(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else {
-              // Full name retrieved successfully
-              final fullName = snapshot.data!;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Column(
-                      children: [
-                        const CircleAvatar(
-                          radius: 60,
-                          backgroundImage: AssetImage('images/user.png'),
-                          backgroundColor: Colors.white,
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          fullName, // Use the fetched full name here
-                          style: poppins.copyWith(
-                            fontSize: 20,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+              // Image URL retrieved successfully
+              final imageUrl = snapshot.data!;
+              return Center(
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: imageUrl.isNotEmpty
+                      ? NetworkImage(imageUrl)
+                      : const AssetImage('images/user.png') as ImageProvider,
+                  backgroundColor: Colors.white,
+                ),
               );
             }
           },

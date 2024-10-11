@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:sessiontask/constants/constants.dart';
-import 'package:sessiontask/constants/ThemeProvider.dart';
 import 'package:sessiontask/widgets/BuildProfile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -134,24 +133,8 @@ class _ProfilePageState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                  icon:
-                      Provider.of<ThemeProvider>(context).themeData == lightmode
-                          ? const Icon(
-                              Icons.nightlight_round,
-                              color: Colors.black,
-                              size: 30,
-                            )
-                          : const Icon(
-                              Icons.sunny,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                  onPressed: () {
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .toggleTheme();
-                  },
-                ),
+
+                
                 Center(
                   child: Column(
                     children: [
