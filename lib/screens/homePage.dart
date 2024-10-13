@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/BuildCoursePage.dart';
 
@@ -13,13 +13,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _username = 'Loading...';
+
   @override
   void initState() {
     super.initState();
-    _fetchUsername();
+    _fetchUserData();
   }
 
-  Future<void> _fetchUsername() async {
+  Future<void> _fetchUserData() async {
     String? uid = FirebaseAuth.instance.currentUser?.uid;
 
     if (uid != null) {
@@ -29,13 +30,11 @@ class _HomePageState extends State<HomePage> {
           .get();
       if (userDoc.exists) {
         var userData = userDoc.data() as Map<String, dynamic>;
-        String? username = userData[
-            'username']; // Assuming the Firestore field name is 'username'
-        if (username != null) {
-          setState(() {
-            _username = username;
-          });
-        }
+        String? username = userData['username']; // Get username
+
+        setState(() {
+          _username = username ?? 'User'; // Default to 'User' if username is null
+        });
       }
     }
   }
@@ -71,16 +70,15 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 15,
-                      backgroundImage: AssetImage('images/user.png'),
                       backgroundColor: Colors.white,
+                      backgroundImage: const AssetImage('images/user.png'), // Use static user.png
                     ),
                     const SizedBox(width: 10),
                     Text(
                       'Hi, $_username!', // Display the fetched username
-                      style:
-                          poppins.copyWith(fontSize: 18, color: Colors.white),
+                      style: poppins.copyWith(fontSize: 18, color: Colors.white),
                     ),
                     const SizedBox(width: 5),
                     Transform.scale(
@@ -118,7 +116,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-      ), // Ensure
+      ),
       body: const BuildCoursePage(),
     );
   }

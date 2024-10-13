@@ -142,12 +142,13 @@ class _ProfilePageState extends State<ProfilePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 85,
-                  height: 60,
+                  width: 80,
+                  height: 50,
                  decoration: BoxDecoration(color: const Color.fromARGB(255, 8, 62, 155),borderRadius: BorderRadius.circular(15),border: Border.all(color: Colors.grey,width: .5)),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset("images/trophy.png", scale: 11),
+                      Image.asset("images/trophy.png", scale: 16),
                       Text(
                         "$_points", // Display the points fetched from Firestore
                         style: const TextStyle(
