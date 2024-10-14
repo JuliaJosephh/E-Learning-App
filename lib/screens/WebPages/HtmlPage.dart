@@ -16,11 +16,11 @@ class _HTMLPageState extends State<HTMLPage> {
   Widget build(BuildContext context) {
     return ContentPage(
       content: htmlContent,
-      questions: HTMLQuestions, 
-      title: 'HTML', 
-      currentPage: const HTMLPage(), 
-      trackChosen: webDevChapters, 
-      language: 'HTML', 
+      questions: HTMLQuestions,
+      title: 'HTML',
+      currentPage: const HTMLPage(),
+      trackChosen: webDevChapters,
+      language: 'HTML',
     );
   }
 }

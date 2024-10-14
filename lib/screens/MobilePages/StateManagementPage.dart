@@ -15,12 +15,12 @@ class _StateManagementPageState extends State<StateManagementPage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: stateManagementContent, 
-      questions: stateManagementQuestions, 
+      content: stateManagementContent,
+      questions: stateManagementQuestions,
       title: 'State Management',
       currentPage: const StateManagementPage(),
-      trackChosen: mobileDevChapters, 
-      language: 'Dart', 
+      trackChosen: mobileDevChapters,
+      language: 'Dart',
     );
   }
 }

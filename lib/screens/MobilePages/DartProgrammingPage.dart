@@ -15,11 +15,11 @@ class _DartProgrammingPageState extends State<DartProgrammingPage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: dartContent, 
-      questions: DartQuestions, 
-      title: 'Dart', 
-      currentPage: const DartProgrammingPage(), 
-      trackChosen: mobileDevChapters, 
+      content: dartContent,
+      questions: DartQuestions,
+      title: 'Dart',
+      currentPage: const DartProgrammingPage(),
+      trackChosen: mobileDevChapters,
       language: 'Dart',
     );
   }

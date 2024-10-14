@@ -7,6 +7,7 @@ import 'package:sessiontask/screens/AIPages/MachineLearningPage.dart';
 //web
 import 'package:sessiontask/screens/WebPages/HtmlPage.dart';
 import 'package:sessiontask/screens/WebPages/JavaScriptPage.dart';
+import 'package:sessiontask/screens/WebPages/JavaScriptPage.dart';
 import 'package:sessiontask/screens/WebPages/PHPPage.dart';
 import 'package:sessiontask/screens/WebPages/CSSPage.dart';
 
@@ -28,23 +29,24 @@ final List<Map<String, dynamic>> aiChapters = [
     'title': 'Python Basics',
     'isLocked': false,
     'Page': const PythonPage(),
+    'Page': const PythonPage(),
   },
   {
     'index': 2,
     'title': 'Python libraries: Pandas',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const PandasPage()
   },
   {
     'index': 3,
     'title': 'Python libraries: NumPy',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const NumPyPage()
   },
   {
     'index': 4,
     'title': 'Machine Learning',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const MachineLearningPage()
   },
 ];
@@ -58,7 +60,7 @@ final List<Map<String, dynamic>> webDevChapters = [
     'isLocked': true,
     'Page': const JavaScriptPage()
   },
-  {'index': 4, 'title': 'PHP', 'isLocked': true, 'Page': const PHPPage()},
+  {'index': 4, 'title': 'PHP', 'isLocked': false, 'Page': const PHPPage()},
 ];
 
 final List<Map<String, dynamic>> mobileDevChapters = [
@@ -71,49 +73,49 @@ final List<Map<String, dynamic>> mobileDevChapters = [
   {
     'index': 2,
     'title': 'Dart Programming',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const DartProgrammingPage()
   },
   {
     'index': 3,
     'title': 'Flutter widgets',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const FlutterWidgetsPage()
   },
   {
     'index': 4,
     'title': 'State Management',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const StateManagementPage()
   },
   {
     'index': 5,
     'title': 'Navigation',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const NavigationPage()
   },
   {
     'index': 6,
     'title': 'API Integration',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const APIIntegrationPage()
   },
   {
     'index': 7,
     'title': 'Local Data storage',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const LocalDataStoragePage()
   },
   {
     'index': 8,
     'title': 'Flutter Packages and Plugins',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const FlutterpackagesPluginsPage()
   },
   {
     'index': 9,
     'title': 'Publishing to App Store',
-    'isLocked': true,
+    'isLocked': false,
     'Page': const PublishingToAppStorePage()
   },
 ];

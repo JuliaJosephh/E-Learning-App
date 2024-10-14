@@ -15,12 +15,12 @@ class _APIIntegrationPageState extends State<APIIntegrationPage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: apiIntegrationContent, 
+      content: apiIntegrationContent,
       questions: apiIntegrationQuestions,
-      title: 'API Integration', 
-      currentPage: const APIIntegrationPage(), 
+      title: 'API Integration',
+      currentPage: const APIIntegrationPage(),
       trackChosen: mobileDevChapters,
-       language: 'Dart', 
+      language: 'Dart',
     );
   }
 }

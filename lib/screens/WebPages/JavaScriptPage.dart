@@ -16,11 +16,11 @@ class _JavaScriptPageState extends State<JavaScriptPage> {
   Widget build(BuildContext context) {
     return ContentPage(
       content: JSContent,
-      questions: JSQuestions, 
+      questions: JSQuestions,
       title: 'JavaScript',
       currentPage: const JavaScriptPage(),
-      trackChosen: webDevChapters, 
-      language: 'JavaScript', 
+      trackChosen: webDevChapters,
+      language: 'JavaScript',
     );
   }
 }

@@ -15,11 +15,11 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: navigationContent, 
-      questions: navigationQuestions, 
-      title: 'Navigation', 
+      content: navigationContent,
+      questions: navigationQuestions,
+      title: 'Navigation',
       currentPage: const NavigationPage(),
-      trackChosen: mobileDevChapters, 
+      trackChosen: mobileDevChapters,
       language: 'Dart',
     );
   }

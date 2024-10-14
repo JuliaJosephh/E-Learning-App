@@ -79,9 +79,11 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          for (var option in selectedQuestions[index]['options'])
+                          for (var option in selectedQuestions[index]
+                              ['options'])
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 2.0),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
@@ -93,8 +95,8 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
                                   if (!isSubmitted) {
                                     setState(() {
                                       selectedAnswers[index] = option;
-                                      correctAnswers[index] =
-                                          option == selectedQuestions[index]['Answer'];
+                                      correctAnswers[index] = option ==
+                                          selectedQuestions[index]['Answer'];
                                     });
                                   }
                                 },
@@ -185,7 +187,8 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Lottie.asset('assets/animations/Celebration.json', repeat: true),
+                Lottie.asset('assets/animations/Celebration.json',
+                    repeat: true),
                 const SizedBox(height: 20),
                 const Text(
                   'Congratulations!',
@@ -281,7 +284,8 @@ class RandomQuestionsPageState extends State<RandomQuestionsPage> {
 
       final pointsToAdd = 10;
 
-      final userDoc = FirebaseFirestore.instance.collection('User_Info').doc(userId);
+      final userDoc =
+          FirebaseFirestore.instance.collection('User_Info').doc(userId);
 
       final docSnapshot = await userDoc.get();
 

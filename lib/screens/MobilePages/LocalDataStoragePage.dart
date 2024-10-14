@@ -15,12 +15,12 @@ class _LocalDataStoragePageState extends State<LocalDataStoragePage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: localDataStorageContent, 
-      questions: localDataStorageQuestions, 
+      content: localDataStorageContent,
+      questions: localDataStorageQuestions,
       title: 'Local Data Storage',
-      currentPage: const LocalDataStoragePage(), 
-      trackChosen: mobileDevChapters, 
-      language: 'Dart', 
+      currentPage: const LocalDataStoragePage(),
+      trackChosen: mobileDevChapters,
+      language: 'Dart',
     );
   }
 }

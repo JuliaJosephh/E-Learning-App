@@ -35,6 +35,7 @@ class _CourseDetailsPageState extends State<CourseDetailsPage> {
         ),
       ),
       body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(

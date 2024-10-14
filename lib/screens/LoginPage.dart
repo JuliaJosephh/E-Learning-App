@@ -363,7 +363,7 @@ class _LoginState extends State<Login> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const Signup(), // Navigate to SignUpPage
+                                const Signup(), 
                           ),
                         );
                       },

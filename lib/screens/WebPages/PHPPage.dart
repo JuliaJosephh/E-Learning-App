@@ -19,8 +19,8 @@ class _PHPPageState extends State<PHPPage> {
       questions: PHPQuestions,
       title: 'PHP',
       currentPage: const PHPPage(),
-      trackChosen: webDevChapters, 
-      language: 'PHP', 
+      trackChosen: webDevChapters,
+      language: 'PHP',
     );
   }
 }

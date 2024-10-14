@@ -15,12 +15,12 @@ class _IntroToFlutterPageState extends State<IntroToFlutterPage> {
   @override
   Widget build(BuildContext context) {
     return ContentPage(
-      content: flutterContent, 
-      questions: FlutterQuestions, 
-      title: 'Introduction to Flutter', 
+      content: flutterContent,
+      questions: FlutterQuestions,
+      title: 'Introduction to Flutter',
       currentPage: const IntroToFlutterPage(),
-      trackChosen: mobileDevChapters, language: 'Dart',
-      
+      trackChosen: mobileDevChapters,
+      language: 'Dart',
     );
   }
 }
