@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/screens/AccountInfoPage.dart';
@@ -16,7 +17,6 @@ Widget buildprofile(BuildContext context) {
         Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
         Icon(Icons.assignment_ind_rounded, color: IconColor),
         onPressed: () {
-          // Add navigation for Account Info
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const AccountInfoPage()));
         },
@@ -28,7 +28,6 @@ Widget buildprofile(BuildContext context) {
         Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
         Icon(Icons.density_small_sharp, color: IconColor),
         onPressed: () {
-          // Navigate to Courses Details page
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const DefaultScreen()),
@@ -41,14 +40,15 @@ Widget buildprofile(BuildContext context) {
         "Logout",
         Icon(Icons.arrow_forward_ios_outlined, color: IconColor),
         Icon(Icons.logout_outlined, color: IconColor),
-        onPressed: () {
-          // Navigate to Login page (logout)
-          Navigator.pushReplacement(
+        onPressed: () async {
+          await FirebaseAuth.instance.signOut();
+          Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => const Login()),
           );
         },
       ),
+      const SizedBox(height: 20),
     ],
   );
 }

@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/Content/webContent/JavaScriptContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
 import 'package:sessiontask/quizzes/WebQuizzes/JavaScriptQuestions.dart';
 import 'package:sessiontask/screens/ContentPage.dart';
 
-class JavaScriptPage extends StatelessWidget {
+class JavaScriptPage extends StatefulWidget {
   const JavaScriptPage({super.key});
 
   @override
+  State<JavaScriptPage> createState() => _JavaScriptPageState();
+}
+
+class _JavaScriptPageState extends State<JavaScriptPage> {
+  @override
   Widget build(BuildContext context) {
-    return const ContentPage(
-      content: JSContent, // Pass the content
-      questions: JSQuestions, // Pass the questions
-      title: 'JavaScript', // Pass the title
+    return ContentPage(
+      content: JSContent,
+      questions: JSQuestions,
+      title: 'JavaScript',
+      currentPage: const JavaScriptPage(),
+      trackChosen: webDevChapters,
+      language: 'JavaScript',
     );
   }
 }

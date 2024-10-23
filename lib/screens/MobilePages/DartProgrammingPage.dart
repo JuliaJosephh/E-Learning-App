@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/Content/FlutterContent/DartProgrammingContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
 import 'package:sessiontask/quizzes/FlutterQuizzes/DartQuestions.dart';
 import 'package:sessiontask/screens/ContentPage.dart';
 
-class DartProgrammingPage extends StatelessWidget {
+class DartProgrammingPage extends StatefulWidget {
   const DartProgrammingPage({super.key});
 
   @override
+  State<DartProgrammingPage> createState() => _DartProgrammingPageState();
+}
+
+class _DartProgrammingPageState extends State<DartProgrammingPage> {
+  @override
   Widget build(BuildContext context) {
-    return const ContentPage(
-      content: dartContent, // Pass the content
-      questions: DartQuestions, // Pass the questions
-      title: 'Dart', // Pass the title
+    return ContentPage(
+      content: dartContent,
+      questions: DartQuestions,
+      title: 'Dart',
+      currentPage: const DartProgrammingPage(),
+      trackChosen: mobileDevChapters,
+      language: 'Dart',
     );
   }
 }

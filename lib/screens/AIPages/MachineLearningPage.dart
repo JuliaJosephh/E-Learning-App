@@ -4,9 +4,14 @@ import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/CodeBox.dart'; 
 import 'package:url_launcher/url_launcher.dart';
 
-class MachineLearningPage extends StatelessWidget {
+class MachineLearningPage extends StatefulWidget {
   const MachineLearningPage({super.key});
 
+  @override
+  State<MachineLearningPage> createState() => _MachineLearningPageState();
+}
+
+class _MachineLearningPageState extends State<MachineLearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

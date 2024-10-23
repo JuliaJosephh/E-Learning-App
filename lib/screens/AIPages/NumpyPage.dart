@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:sessiontask/Content/AIContent/NumPyContent.dart';
+import 'package:sessiontask/Tracks/TracksChapters.dart';
 import 'package:sessiontask/quizzes/AIQuizzes/NumPyQuestions.dart';
 import 'package:sessiontask/screens/ContentPage.dart';
 
-class NumPyPage extends StatelessWidget {
+class NumPyPage extends StatefulWidget {
   const NumPyPage({super.key});
-  
-@override
+
+  @override
+  State<NumPyPage> createState() => _NumPyPageState();
+}
+
+class _NumPyPageState extends State<NumPyPage> {
+  @override
   Widget build(BuildContext context) {
-    return const ContentPage(
-      content: NumPyContent, // Pass the content
-      questions: NumPyQuestions, // Pass the questions
-      title: 'NumPy', // Pass the title
+    return ContentPage(
+      content: NumPyContent,
+      questions: NumPyQuestions,
+      title: 'NumPy',
+      currentPage: const NumPyPage(),
+      trackChosen: aiChapters,
+      language: 'Python',
     );
   }
 }

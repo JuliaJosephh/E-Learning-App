@@ -4,9 +4,14 @@ import 'package:sessiontask/constants/constants.dart';
 import 'package:sessiontask/widgets/CodeBox.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class PublishingToAppStorePage extends StatelessWidget {
+class PublishingToAppStorePage extends StatefulWidget {
   const PublishingToAppStorePage({super.key});
 
+  @override
+  State<PublishingToAppStorePage> createState() => _PublishingToAppStorePageState();
+}
+
+class _PublishingToAppStorePageState extends State<PublishingToAppStorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

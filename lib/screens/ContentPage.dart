@@ -4,16 +4,22 @@ import 'package:sessiontask/screens/QuizFunctionalityPage.dart';
 import 'package:sessiontask/widgets/CodeBox.dart';
 
 class ContentPage extends StatelessWidget {
-  final List<Map<String, dynamic>> content; // List of content items
-  final List<Map<String, dynamic>> questions; // List of questions
-  final String title; // Title of the content
+  final List<Map<String, dynamic>> content; 
+  final List<Map<String, dynamic>> questions; 
+  final String title;
+  final dynamic currentPage;
+  final dynamic trackChosen; 
+  final String language; 
 
   const ContentPage({
-    Key? key,
+    super.key,
     required this.content,
     required this.questions,
     required this.title,
-  }) : super(key: key);
+    required this.currentPage,
+    required this.trackChosen,
+    required this.language, 
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +40,9 @@ class ContentPage extends StatelessWidget {
           children: [
             ListView.builder(
               physics:
-                  const NeverScrollableScrollPhysics(), // Disable scrolling
+                  const NeverScrollableScrollPhysics(), 
               shrinkWrap:
-                  true, // Allow the ListView to size itself to its content
+                  true, 
               itemCount: content.length,
               itemBuilder: (context, index) {
                 final item = content[index];
@@ -66,7 +72,7 @@ class ContentPage extends StatelessWidget {
                           if (item['code'] != null)
                             CodeBox(
                               code: item['code'],
-                              language: "Python",
+                              language: language, 
                             ),
                         ],
                       ),
@@ -75,30 +81,29 @@ class ContentPage extends StatelessWidget {
                 );
               },
             ),
-            // Button to start the quiz
             Padding(
               padding: const EdgeInsets.only(bottom: 10.0, right: 10.0),
               child: Align(
-                alignment: Alignment.centerRight, // Align button to the right
+                alignment: Alignment.centerRight, 
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor:
-                        backgroundColor, // Define your button color
+                        backgroundColor,
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 12), // Button padding
+                        horizontal: 24, vertical: 12), 
                     shape: RoundedRectangleBorder(
                       borderRadius:
-                          BorderRadius.circular(30.0), // Rounded corners
+                          BorderRadius.circular(30.0), 
                     ),
-                    elevation: 6, // Elevation for shadow
+                    elevation: 6, 
                   ),
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            RandomQuestionsPage(questions: questions),
+                            RandomQuestionsPage(questions: questions, CurrentPage: currentPage, TrackChosen: trackChosen),
                       ),
                     );
                   },

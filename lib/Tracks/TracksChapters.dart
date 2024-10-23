@@ -7,6 +7,7 @@ import 'package:sessiontask/screens/AIPages/MachineLearningPage.dart';
 //web
 import 'package:sessiontask/screens/WebPages/HtmlPage.dart';
 import 'package:sessiontask/screens/WebPages/JavaScriptPage.dart';
+import 'package:sessiontask/screens/WebPages/JavaScriptPage.dart';
 import 'package:sessiontask/screens/WebPages/PHPPage.dart';
 import 'package:sessiontask/screens/WebPages/CSSPage.dart';
 
@@ -27,6 +28,7 @@ final List<Map<String, dynamic>> aiChapters = [
     'index': 1,
     'title': 'Python Basics',
     'isLocked': false,
+    'Page': const PythonPage(),
     'Page': const PythonPage(),
   },
   {
@@ -51,11 +53,11 @@ final List<Map<String, dynamic>> aiChapters = [
 
 final List<Map<String, dynamic>> webDevChapters = [
   {'index': 1, 'title': 'HTML', 'isLocked': false, 'Page': const HTMLPage()},
-  {'index': 2, 'title': 'CSS', 'isLocked': false, 'Page': const CSSPage()},
+  {'index': 2, 'title': 'CSS', 'isLocked': true, 'Page': const CSSPage()},
   {
     'index': 3,
     'title': 'JavaScript ',
-    'isLocked': false,
+    'isLocked': true,
     'Page': const JavaScriptPage()
   },
   {'index': 4, 'title': 'PHP', 'isLocked': false, 'Page': const PHPPage()},
